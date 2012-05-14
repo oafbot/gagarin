@@ -1,0 +1,13 @@
+*.log
+*.cache
+tmp/logs/*
+tmp/cache/*
+public/media/*
+tmp/sessions/*
+tmp/uploads/*
+*.svn
+*.svn/*
+*.sql
+!schema.sql
+.DS_Store*
+*.DS_Store
