@@ -1,10 +1,10 @@
 <?php
 /**
- * LAIKA_Interface_Model interface.
+ * Laika_Interface_Model interface.
  *
  * @interface
  */
-interface LAIKA_Interface_Model{
+interface Laika_Interface_Model{
 
     public function dset($property,$value);
     public function dget($property);

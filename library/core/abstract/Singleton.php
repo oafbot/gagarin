@@ -15,14 +15,14 @@
  *
  */
  /**
-  * Abstract LAIKA_Singleton class.
+  * Abstract Laika_Singleton class.
   * 
   * Base class for all objects employing the Singleton pattern.
   *
   * @abstract
   * @extends Laika
   */
- abstract class LAIKA_Singleton extends Laika{
+ abstract class Laika_Singleton extends Laika{
 
 //-------------------------------------------------------------------
 //	PROPERTIES

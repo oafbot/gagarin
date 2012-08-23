@@ -15,21 +15,21 @@
  *
  */
 /**
- * LAIKA_Exception_Handler class.
+ * Laika_Exception_Handler class.
  * 
  * Intercepts uncaught exceptions.
  * Notifies Observers of intercepted exceptions.
  *
- * @extends LAIKA_Singleton
+ * @extends Laika_Singleton
  * @implements SplSubject
  */
-class LAIKA_Exception_Handler extends LAIKA_Singleton implements SplSubject{
+class Laika_Exception_Handler extends Laika_Singleton implements SplSubject{
 
 //-------------------------------------------------------------------
 //	VARIABLES
 //-------------------------------------------------------------------
     /**
-    * instance of LAIKA_Exception_Handler
+    * instance of Laika_Exception_Handler
     * 
     * @var    object
     * @access protected

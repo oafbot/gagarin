@@ -15,9 +15,9 @@
  *
  */
 /**
- * LAIKA_Application_Controller class.
+ * Laika_Application_Controller class.
  */
-class LAIKA_Application_Controller extends LAIKA_Abstract_Controller{
+class Laika_Application_Controller extends Laika_Abstract_Controller{
 
 //-------------------------------------------------------------------
 //	VARIABLES
@@ -60,7 +60,7 @@ class LAIKA_Application_Controller extends LAIKA_Abstract_Controller{
      */
     private function invoke_target($controller,$method, $parameters){
         
-        $class_name = LAIKA_Data::format_class_name($controller);        
+        $class_name = Laika_Data::format_class_name($controller);        
         $page = CODE_NAME.'_'.$class_name.'_Controller';        
         $action = strtolower($method);
 
@@ -68,12 +68,12 @@ class LAIKA_Application_Controller extends LAIKA_Abstract_Controller{
             if($page::$access_level == 'PUBLIC' && !REQUIRE_LOGIN)
                 $page::init()->action_handler($action,$parameters);
             
-            elseif($controller != 'login' && !LAIKA_Access::is_logged_in()) 
+            elseif($controller != 'login' && !Laika_Access::is_logged_in()) 
                 $this->login_interrupt($controller,$method, $parameters);                
             
             else $page::init()->action_handler($action,$parameters); 
         }
-        catch(LAIKA_Exception $e){
+        catch(Laika_Exception $e){
             if($e->getCode() == 900)
                 self::redirect_to('/error/missing');
         }
@@ -86,7 +86,7 @@ class LAIKA_Application_Controller extends LAIKA_Abstract_Controller{
      * @return void
      */
     private function login_interrupt($controller,$method, $parameters){
-        LAIKA_Controller::process(new LAIKA_Command('ROUTER','SET_REDIRECT',array($controller, $method, $parameters)));
+        Laika_Controller::process(new Laika_Command('ROUTER','SET_REDIRECT',array($controller, $method, $parameters)));
         $this->invoke_target('login','default', NULL);
     }
     

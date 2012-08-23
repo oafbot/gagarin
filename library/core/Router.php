@@ -15,11 +15,11 @@
  *
  */
 /**
- * LAIKA_Router class.
+ * Laika_Router class.
  * 
- * @extends LAIKA_Singleton
+ * @extends Laika_Singleton
  */
-class LAIKA_Router extends LAIKA_Singleton{
+class Laika_Router extends Laika_Singleton{
 
 //-------------------------------------------------------------------
 //	VARIABLES
@@ -75,7 +75,7 @@ class LAIKA_Router extends LAIKA_Singleton{
     } 
     
     public function set_redirect($array){
-        if(!isset($_SESSION['REDIRECT']) && !LAIKA_Access::is_logged_in()) 
+        if(!isset($_SESSION['REDIRECT']) && !Laika_Access::is_logged_in()) 
             $_SESSION['REDIRECT'] = HTTP_ROOT."/".$array[0]."/".$array[1]."/".$array[2];
     }
 
@@ -93,8 +93,8 @@ class LAIKA_Router extends LAIKA_Singleton{
         $command_set['COMMANDS']   = self::$instance->commands;
         $command_set['PARAMETERS'] = self::$instance->parameters; 
         /* Hand off the command set to the Application Controller */
-        LAIKA_Controller::process(new LAIKA_Command('APPLICATION_CONTROLLER', 'CALL_TARGET', $command_set));
-        //LAIKA_Registry::register(__CLASS__,self::$instance);        
-        //LAIKA_Event::init()->register('ROUTING', );
+        Laika_Controller::process(new Laika_Command('APPLICATION_CONTROLLER', 'CALL_TARGET', $command_set));
+        //Laika_Registry::register(__CLASS__,self::$instance);        
+        //Laika_Event::init()->register('ROUTING', );
     }      
 }

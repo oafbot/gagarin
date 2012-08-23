@@ -15,11 +15,11 @@
  *
  */
 /**
- * LAIKA_Error class
+ * Laika_Error class
  *
  * 
  */
-class LAIKA_Error extends LAIKA_Singleton{
+class Laika_Error extends Laika_Singleton{
 
 //-------------------------------------------------------------------
 //	VARIABLES

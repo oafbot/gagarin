@@ -1,5 +1,5 @@
 <?php
-class LAIKA_Collection extends ArrayObject{
+class Laika_Collection extends ArrayObject{
 
     public function __construct(){        
         $args = func_get_args();
@@ -8,30 +8,30 @@ class LAIKA_Collection extends ArrayObject{
                 /**
                 * Is it a Collectable Object?
                 */
-                if(is_a($arg,'LAIKA_Collectable')):
+                if(is_a($arg,'Laika_Collectable')):
                     parent::__construct($arg);
                 /**
                 * Is it an Object?
                 */
                 elseif(is_object($arg)):
-                    $obj = new LAIKA_Collectable($arg);
+                    $obj = new Laika_Collectable($arg);
                     parent::__construct($obj);
                 /**
                 * Is it an array of Objects?
                 */
                 elseif(is_array($arg)):
                     foreach($arg as $k => $v):
-                        if(!is_a($v,'LAIKA_Collectable') && is_object($v))
-                            $arg[] = LAIKA_Collectable($v);
+                        if(!is_a($v,'Laika_Collectable') && is_object($v))
+                            $arg[] = Laika_Collectable($v);
                         elseif(!is_object($v))
-                            throw new LAIKA_Exception('INVALID_DATA_TYPE',800);
+                            throw new Laika_Exception('INVALID_DATA_TYPE',800);
                     endforeach;
                     parent::__construct($arg);
                 /**
                 * Otherwise throw Exception.
                 */
                 else: 
-                    throw new LAIKA_Exception('INVALID_DATA_TYPE',800);
+                    throw new Laika_Exception('INVALID_DATA_TYPE',800);
                 endif;
             endforeach;
         else:
@@ -41,20 +41,20 @@ class LAIKA_Collection extends ArrayObject{
     
 
     public function append($value){
-        $this[] = new LAIKA_Collectable($value);
+        $this[] = new Laika_Collectable($value);
     }
 
     
 
 /*
     public function offsetSet($key,$value){
-        $this[$key] = new LAIKA_Collectable($value);
+        $this[$key] = new Laika_Collectable($value);
     }
 */
 
     
     public function __set($key,$value){
-        $this->$key = new LAIKA_Collectable($value);    
+        $this->$key = new Laika_Collectable($value);    
     }
     
     public function __get($key){
@@ -97,11 +97,11 @@ class LAIKA_Collection extends ArrayObject{
      * push function.
      * 
      * @access public
-     * @param LAIKA_Collectable $object
+     * @param Laika_Collectable $object
      * @return void
      */
     public function push($object){
-        $this[] = new LAIKA_Collectable($object);
+        $this[] = new Laika_Collectable($object);
     }
 
     /**

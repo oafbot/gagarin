@@ -1,5 +1,5 @@
 <?php
-class GAGARIN_Upload_Controller extends LAIKA_Abstract_Page_Controller {
+class Gagarin_Upload_Controller extends Laika_Abstract_Page_Controller {
 
 //-------------------------------------------------------------------
 //	VARIABLES
@@ -41,7 +41,7 @@ class GAGARIN_Upload_Controller extends LAIKA_Abstract_Page_Controller {
     public function complete(){
         $this->display(array(
         "page"=>"upload",
-        "user"=>LAIKA_User::active()->id(),
+        "user"=>Laika_User::active()->id(),
         /*"alert"=>"Upload successful",
         "alert_type"=>"success",*/
         "upload"=>$this->parameters["upload"],
@@ -83,7 +83,7 @@ class GAGARIN_Upload_Controller extends LAIKA_Abstract_Page_Controller {
     public function error(){
         $this->display(array(
         "page"=>"upload",
-        "user"=>LAIKA_User::active()->id(),
+        "user"=>Laika_User::active()->id(),
         "submenu"=>unserialize($this->submenu),
         "alert"=>"Upload failed.",
         "alert_type"=>"warning" ));        
@@ -103,14 +103,14 @@ class GAGARIN_Upload_Controller extends LAIKA_Abstract_Page_Controller {
             $array = func_get_arg(1);
             
         foreach($array as $key => $value):
-            $media = new GAGARIN_Media();
-            $media->user         =  LAIKA_User::active()->id();
-            $media->path         =  HTTP_ROOT.'/media/'.LAIKA_User::active()->username.'/'.$value;
+            $media = new Gagarin_Media();
+            $media->user         =  Laika_User::active()->id();
+            $media->path         =  HTTP_ROOT.'/media/'.Laika_User::active()->username.'/'.$value;
             $media->type         =  "image";
             $media->privacy      =  1;
             $media->access_group =  'everyone';
             $media->created      =  date("Y-m-d");
-            GAGARIN_Media::add($media);
+            Gagarin_Media::add($media);
             
             ($i > 0) ? ($param['upload'] .= '+'.$value) : ($param['upload'] = $value);
             $i++;        

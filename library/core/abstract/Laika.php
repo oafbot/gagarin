@@ -26,8 +26,8 @@ abstract class Laika{
 //	CONSTANTS & VARIABLES
 //-------------------------------------------------------------------
 	
-	const LAIKA_VERSION = 0.20;
-	const LAIKA_RELEASE = 'alpha'; // alpha, beta, rc, production
+	const Laika_VERSION = 0.20;
+	const Laika_RELEASE = 'alpha'; // alpha, beta, rc, production
 	
 //-------------------------------------------------------------------
 //	CONSTRUCTOR
@@ -55,7 +55,7 @@ abstract class Laika{
      * @static
      * @return constant VERSION
      */
-    public static function version(){return LAIKA_VERSION;}
+    public static function version(){return Laika_VERSION;}
     
     /**
      * release function.
@@ -66,7 +66,7 @@ abstract class Laika{
      * @static
      * @return constant RELEASE
      */
-    public static function release(){return LAIKA_RELEASE;}
+    public static function release(){return Laika_RELEASE;}
     
     /**
      * __get function.

@@ -1,10 +1,10 @@
 <?php
 /**
- * LAIKA_Mail class.
+ * Laika_Mail class.
  * 
  * @extends Laika
  */
-class LAIKA_Mail extends Laika{
+class Laika_Mail extends Laika{
 
 /*
     private $sender;

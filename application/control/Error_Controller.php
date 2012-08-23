@@ -5,7 +5,7 @@
  *	@filesource     Home_Controller.php
  *
  *	@version        0.1.0b
- *	@package        GAGARIN
+ *	@package        Gagarin
  *	@subpackage     control
  *	@category       control
  *	@date           2011-05-21 03:37:00 -0400 (Sat, 21 May 2011)
@@ -14,7 +14,7 @@
  *	@copyright      Copyright (c) 2011  Laika Soft <{@link http://oafbot.com}>
  *
  */
-class GAGARIN_Error_Controller extends LAIKA_Error_Controller{
+class Gagarin_Error_Controller extends Laika_Error_Controller{
 
     protected static $instance;
     protected        $parameters;

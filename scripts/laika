@@ -73,7 +73,7 @@ function model($name,$params){
         $properties .= PHP_EOL.chr(9).chr(9).'protected        $'.$value[0].';';
     
     $content  = '<?php
-class '.CODE_NAME.'_'.format_name($name).' extends LAIKA_Abstract_Model{
+class '.CODE_NAME.'_'.format_name($name).' extends Laika_Abstract_Model{
 
 //-------------------------------------------------------------------
 //	PROPERTIES
@@ -93,7 +93,7 @@ class '.CODE_NAME.'_'.format_name($name).' extends LAIKA_Abstract_Model{
 }';
     
     $table  = strtolower($name).'s';
-    //LAIKA_Database::create($table,$pairs);
+    //Laika_Database::create($table,$pairs);
     
     create($table,$pairs);
                 
@@ -137,7 +137,7 @@ function controller($name){
     $file     = fopen($filename,'w+') or die('Error on file creation');
     
     $content  = '<?php
-class '.CODE_NAME.'_'.format_name($name).'_Controller extends LAIKA_Abstract_Page_Controller {
+class '.CODE_NAME.'_'.format_name($name).'_Controller extends Laika_Abstract_Page_Controller {
 
 //-------------------------------------------------------------------
 //	PROPERTIES
@@ -172,7 +172,7 @@ function view($name){
     $file     = fopen($filename,'w+') or die('Error on file creation');
     
     $content = '<?php
-class '.CODE_NAME.'_'.format_name($name).'_Page extends LAIKA_Abstract_Page{
+class '.CODE_NAME.'_'.format_name($name).'_Page extends Laika_Abstract_Page{
 
 	protected static $instance;
 

@@ -15,9 +15,9 @@
  *
  */
 /**
- * LAIKA_Interface_Exception interface.
+ * Laika_Interface_Exception interface.
  */
-interface LAIKA_Interface_Exception{
+interface Laika_Interface_Exception{
 
 //-------------------------------------------------------------------
 //	CONSTRUCTOR

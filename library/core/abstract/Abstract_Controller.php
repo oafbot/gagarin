@@ -15,9 +15,9 @@
  *
  */
 /**
- * Abstract LAIKA_Abstract_Controller class.
+ * Abstract Laika_Abstract_Controller class.
  * 
  * @abstract
- * @extends LAIKA_Singleton
+ * @extends Laika_Singleton
  */
-abstract class LAIKA_Abstract_Controller extends LAIKA_Singleton{}
+abstract class Laika_Abstract_Controller extends Laika_Singleton{}

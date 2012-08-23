@@ -1,11 +1,11 @@
 <?php
 /**
- * Abstract LAIKA_Abstract_Singleton_Model class.
+ * Abstract Laika_Abstract_Singleton_Model class.
  * 
  * @abstract
- * @extends LAIKA_Singleton
+ * @extends Laika_Singleton
  */
-abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements LAIKA_Interface_Model{
+abstract class Laika_Abstract_Singleton_Model extends Laika_Singleton implements Laika_Interface_Model{
 
     protected static $instance;
     protected        $model;
@@ -34,7 +34,7 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
         if(is_int(strpos($class,CODE_NAME)))
             $m->model = str_replace(CODE_NAME.'_', "", $class, $count = 1);
         else
-            $m->model = str_replace(LAIKA_NS, "", $class, $count = 1);        
+            $m->model = str_replace(NAME_SPACE, "", $class, $count = 1);        
         $m->table = strtolower($m->model)."s";
         
         return $m;    
@@ -59,7 +59,7 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
         $table = static::init()->table;
         $id    = static::init()->id; 
         
-        LAIKA_Database::update($table, $property, $value, "id = $id");
+        Laika_Database::update($table, $property, $value, "id = $id");
     }
         
     /**
@@ -73,7 +73,7 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
         
         $table  = static::init()->table;
         $id     = static::init()->id;
-        $result = LAIKA_Database::select_where($property, $table, "id = $id");
+        $result = Laika_Database::select_where($property, $table, "id = $id");
         
         static::init()->$property = $result[$property];
         
@@ -97,7 +97,7 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
         $m =  $class::init();
         $table = $m->table;
         
-        $result = LAIKA_Database::select_by($id,$table);
+        $result = Laika_Database::select_by($id,$table);
 
         $model = get_class_vars(get_class($m));
         $count = count($model);
@@ -120,7 +120,7 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
      */
     public static function find($param,$value){
         $table = self::init()->table;
-        $result = LAIKA_Database::select_where('id', $table, "$param = '$value'");
+        $result = Laika_Database::select_where('id', $table, "$param = '$value'");
         return self::load($result['id']);
     }
     
@@ -149,7 +149,7 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
      * @return void
      */
     public static function get_map(){           
-        $full_map = LAIKA_Database::show(self::init()->table);
+        $full_map = Laika_Database::show(self::init()->table);
         foreach($full_map as $array => $column)
             foreach($column as $key => $value)
                 if($key == 'Field')
@@ -166,7 +166,7 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
      */
     public static function add(){
         $class = get_called_class();
-        LAIKA_Database::add($class::init());
+        Laika_Database::add($class::init());
     }
      
     /**
@@ -178,12 +178,12 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
      * @return void
      */
     public static function delete($object){
-        LAIKA_Database::delete($object->table,$object->id);
+        Laika_Database::delete($object->table,$object->id);
     }
         
 /*
     public static function create(){
-        LAIKA_Database::create(self::init()->table);
+        Laika_Database::create(self::init()->table);
     }
     public static function drop(){}
     public static function update(){}
@@ -201,9 +201,9 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
 
         if(func_num_args()>0):
             $conditions =  self::prep_conditions(func_get_arg(0));
-            $result = LAIKA_Database::count($table,$conditions);
+            $result = Laika_Database::count($table,$conditions);
         else:
-            $result = LAIKA_Database::count($table);
+            $result = Laika_Database::count($table);
         endif;
         return (int)array_pop(array_pop($result));
     }    
@@ -219,9 +219,9 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
         $args = func_get_args();
         $table = self::init()->table;
         if(isset($args[0]) && $args[0] > 1)       
-            return LAIKA_Database::last($table,$args[0]);
+            return Laika_Database::last($table,$args[0]);
         else
-            return LAIKA_Database::last($table,1);
+            return Laika_Database::last($table,1);
     }
     
     /**
@@ -235,9 +235,9 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
         $args = func_get_args();
         $table = self::init()->table;
         if(isset($args[0]) && $args[0] > 1)       
-            return LAIKA_Database::first($table,$args[0]);
+            return Laika_Database::first($table,$args[0]);
         else
-            return LAIKA_Database::first($table,1);
+            return Laika_Database::first($table,1);
     }
     
     /**
@@ -276,7 +276,7 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
                 break;
         }
         $table = self::init()->table;
-        return LAIKA_Database::offset($table,$column,$limit,$offset);
+        return Laika_Database::offset($table,$column,$limit,$offset);
     }   
 
     
@@ -294,7 +294,7 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
         $table = self::init()->table;
         $conditions = $model::prep_conditions($params);
                         
-        return LAIKA_Database::find_with_offset($conditions,$table,$limit,$offset);
+        return Laika_Database::find_with_offset($conditions,$table,$limit,$offset);
     }    
 
 
@@ -358,10 +358,10 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
      * @return void
      */
     public static function collection($array){
-        $collection = new LAIKA_Collection();
+        $collection = new Laika_Collection();
         foreach($array as $key => $value)
             if(is_array($value))
-                $collection[] = new LAIKA_Collectable(self::from_array($value));
+                $collection[] = new Laika_Collectable(self::from_array($value));
         return $collection;    
     }
     
@@ -383,29 +383,29 @@ abstract class LAIKA_Abstract_Singleton_Model extends LAIKA_Singleton implements
     
     
     public function created_to_date(){
-       return LAIKA_Time::database_to_date(self::init()->created);
+       return Laika_Time::database_to_date(self::init()->created);
     }
     public function created_to_shortdate(){
-       return LAIKA_Time::database_to_shortdate(self::init()->created);
+       return Laika_Time::database_to_shortdate(self::init()->created);
     }
     public function created_to_datetime(){
-        return LAIKA_Time::database_to_datetime(self::init()->created);
+        return Laika_Time::database_to_datetime(self::init()->created);
     }
     public function created_to_time(){
-        return LAIKA_Time::database_to_time(self::init()->created);
+        return Laika_Time::database_to_time(self::init()->created);
     }
     
     public function updated_to_date(){
-        return LAIKA_Time::database_to_date(self::init()->updated);
+        return Laika_Time::database_to_date(self::init()->updated);
     }
     public function updated_to_shortdate(){
-        return LAIKA_Time::database_to_shortdate(self::init()->updated);    
+        return Laika_Time::database_to_shortdate(self::init()->updated);    
     }
     public function updated_to_datetime(){
-        return LAIKA_Time::database_to_datetime(self::init()->updated);
+        return Laika_Time::database_to_datetime(self::init()->updated);
     }
     public function updated_to_time(){
-        return LAIKA_Time::database_to_time(self::init()->updated);
+        return Laika_Time::database_to_time(self::init()->updated);
     }
 
     /**

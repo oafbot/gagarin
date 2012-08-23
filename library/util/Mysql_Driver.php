@@ -15,13 +15,13 @@
  *
  */
 /**
- * LAIKA_Mysql class.
+ * Laika_Mysql class.
  *
  * Database wrapper object using mysqli
  *
  * Unimplemented.
  */
-class LAIKA_Mysql_Driver extends LAIKA_Singleton implements LAIKA_Interface_DB_Driver{
+class Laika_Mysql_Driver extends Laika_Singleton implements Laika_Interface_DB_Driver{
 
     protected static $instance;
     private   static $connection;

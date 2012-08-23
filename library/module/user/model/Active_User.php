@@ -1,13 +1,13 @@
 <?php
 /**
- * LAIKA_Active_User class.
+ * Laika_Active_User class.
  *
  * Class representing the user currently logged in.
  * A Singleton representation of the User Model Class.
  * 
- * @extends LAIKA_Abstract_Singleton_Model
+ * @extends Laika_Abstract_Singleton_Model
  */
-class LAIKA_Active_User extends LAIKA_Abstract_Singleton_Model{
+class Laika_Active_User extends Laika_Abstract_Singleton_Model{
 
 //-------------------------------------------------------------------
 //	PROPERTIES
@@ -58,10 +58,10 @@ class LAIKA_Active_User extends LAIKA_Abstract_Singleton_Model{
      * @return void
      */
     public static function bind($id){
-        LAIKA_Active_Session::unregister($id,false);
+        Laika_Active_Session::unregister($id,false);
         $user = self::load($id);
-        LAIKA_Registry::register('Active_User',$user);
-        LAIKA_Active_Session::register($id);
+        Laika_Registry::register('Active_User',$user);
+        Laika_Active_Session::register($id);
     }
 
     /**
@@ -72,8 +72,8 @@ class LAIKA_Active_User extends LAIKA_Abstract_Singleton_Model{
      * @return Active_User Object
      */
     public static function active(){
-        if(LAIKA_Registry::peek('Active_User'))
-            self::$instance = LAIKA_Registry::get_record('Active_User');            
+        if(Laika_Registry::peek('Active_User'))
+            self::$instance = Laika_Registry::get_record('Active_User');            
         elseif( isset($_SESSION['PREVIOUS_TOKEN']) ) 
             self::$instance = self::wake_up();
         else self::init();
@@ -89,9 +89,9 @@ class LAIKA_Active_User extends LAIKA_Abstract_Singleton_Model{
      * @return Active_User Object
      */
     public static function wake_up(){
-        $id = LAIKA_Active_Session::find_user($_SESSION['PREVIOUS_TOKEN']);
+        $id = Laika_Active_Session::find_user($_SESSION['PREVIOUS_TOKEN']);
         self::bind($id);
-        return LAIKA_Registry::get_record('Active_User');
+        return Laika_Registry::get_record('Active_User');
     }
     
     /**
@@ -104,7 +104,7 @@ class LAIKA_Active_User extends LAIKA_Abstract_Singleton_Model{
     public static function sleep(){
         $user = self::active();
         $id = $user::get('id');
-        LAIKA_Active_Session::unregister($id,true);    
+        Laika_Active_Session::unregister($id,true);    
     }
     
     public static function deactivate(){}
@@ -130,7 +130,7 @@ class LAIKA_Active_User extends LAIKA_Abstract_Singleton_Model{
      * @return void
      */
     public static function valid_account(){
-        $account = LAIKA_Account::find('user',self::init()->id);
+        $account = Laika_Account::find('user',self::init()->id);
         if(!$account->confirmed() || $account->deactivated())
             return false;
         return true;
@@ -143,7 +143,7 @@ class LAIKA_Active_User extends LAIKA_Abstract_Singleton_Model{
      * @return void
      */
     public function account(){
-        return LAIKA_Account::find('user',self::init()->id);
+        return Laika_Account::find('user',self::init()->id);
     }
     
     /**
@@ -167,6 +167,6 @@ class LAIKA_Active_User extends LAIKA_Abstract_Singleton_Model{
      */
     public function avatar($size){
         $link = '<a href="'.HTTP_ROOT.'/user/'.$this->username.'" >';
-        return $link.LAIKA_Avatar::img(self::init()->email,$size).'</a>';
+        return $link.Laika_Avatar::img(self::init()->email,$size).'</a>';
     }                            
 }

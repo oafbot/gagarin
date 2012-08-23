@@ -8,8 +8,8 @@
 <? if(isset(self::init()->upload))
        $params = explode('+',self::init()->upload);
    foreach($params as $key => $value) 
-       echo '<a href='.HTTP_ROOT.'/media/'.LAIKA_User::active()->username.'/'.$value.' >
-             <img src='.HTTP_ROOT.'/media/'.LAIKA_User::active()->username.'/'.$value.' class="upload_image" /></a>';?>
+       echo '<a href='.HTTP_ROOT.'/media/'.Laika_User::active()->username.'/'.$value.' >
+             <img src='.HTTP_ROOT.'/media/'.Laika_User::active()->username.'/'.$value.' class="upload_image" /></a>';?>
 </p>
 <div class=controls>
 <? self::link_to("Upload more files...","/upload/",array("class"=>"button blue medium bigrounded","id"=>"upload_more")); ?>

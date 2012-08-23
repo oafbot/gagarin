@@ -1,12 +1,12 @@
 <?php
  
 /**
- * Abstract LAIKA_Abstract_Page class.
+ * Abstract Laika_Abstract_Page class.
  * 
  * @abstract
- * @extends LAIKA_Singleton
+ * @extends Laika_Singleton
  */
-abstract class LAIKA_Abstract_Page extends LAIKA_Singleton{
+abstract class Laika_Abstract_Page extends Laika_Singleton{
 
     private static $instance;
     private        $template;
@@ -155,7 +155,7 @@ abstract class LAIKA_Abstract_Page extends LAIKA_Singleton{
             return APP_VIEW_COMPONENTS.'partials/'.$partial.'.php';
         elseif(file_exists($partial.'php'))
             return $partial.'php';
-        throw new LAIKA_Exception('MISSING_PARTIAL',811);
+        throw new Laika_Exception('MISSING_PARTIAL',811);
     }
     
     /**
@@ -345,7 +345,7 @@ abstract class LAIKA_Abstract_Page extends LAIKA_Singleton{
     }
     
     public static function set_login_redirect(){
-        (func_num_args()>0) ? $url = HTTP_ROOT.func_get_arg(0) : $url = LAIKA_Router::init()->uri;
+        (func_num_args()>0) ? $url = HTTP_ROOT.func_get_arg(0) : $url = Laika_Router::init()->uri;
         $_SESSION['REDIRECT'] = $url;        
     }
         

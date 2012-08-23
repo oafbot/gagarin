@@ -1,5 +1,5 @@
 <?php
-class GAGARIN_Api_Page extends LAIKA_Abstract_Page{
+class Gagarin_Api_Page extends Laika_Abstract_Page{
 
 	protected static $instance;
 }

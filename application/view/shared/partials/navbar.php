@@ -2,8 +2,8 @@
 if(isset(self::init()->page))
     $page = self::init()->page;
 
-if(LAIKA_Access::is_logged_in())
-    $user_tab = LAIKA_User::active()->username();
+if(Laika_Access::is_logged_in())
+    $user_tab = Laika_User::active()->username();
 else
     $user_tab = "user";
     
@@ -33,15 +33,15 @@ function style_change($page,$tab){
     	       </a>
     	    </li>
     	    
-    	    <? if(LAIKA_Access::is_logged_in()): ?>
+    	    <? if(Laika_Access::is_logged_in()): ?>
     	       <li class="<? echo $nav[3] ?>">
                     <? self::link_to(USER_ICON." $user_tab", '/user/'); ?>
     	       </li>    	       
             <? endif; ?>
             
             <li class="<? echo $nav[2]; ?>">
-                <a href="<? echo LAIKA_Access::is_logged_in() ? HTTP_ROOT.'/logout/' : HTTP_ROOT.'/login/'; ?>">
-                <? echo LAIKA_Access::is_logged_in() ? LOGIN_ICON.' Logout' : LOGIN_ICON.' Login'; ?></a>
+                <a href="<? echo Laika_Access::is_logged_in() ? HTTP_ROOT.'/logout/' : HTTP_ROOT.'/login/'; ?>">
+                <? echo Laika_Access::is_logged_in() ? LOGIN_ICON.' Logout' : LOGIN_ICON.' Login'; ?></a>
             </li>
         </ul>
     </nav>

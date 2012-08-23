@@ -1,6 +1,6 @@
 <?php
 
-class GAGARIN_Upload_Page extends LAIKA_Abstract_Page{
+class Gagarin_Upload_Page extends Laika_Abstract_Page{
 
 	protected static $instance;
 

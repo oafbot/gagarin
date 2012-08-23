@@ -1,5 +1,5 @@
 <?php
-class LAIKA_File_Object extends SplFileObject{
+class Laika_File_Object extends SplFileObject{
 /**
 *   -------------------------------------------
 *   Inherited from SplFileInfo:

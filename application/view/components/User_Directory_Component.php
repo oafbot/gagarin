@@ -3,7 +3,7 @@
     <div id="list">
         <table id=directory>
         <? foreach(self::init()->users as $array): ?>
-            <? $user = LAIKA_User::from_array($array); ?>
+            <? $user = Laika_User::from_array($array); ?>
             <tr class=user>
                 <td>
                     <? echo $user->avatar(80); ?>

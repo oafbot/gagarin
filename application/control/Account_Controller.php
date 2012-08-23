@@ -1,5 +1,5 @@
 <?php
-class GAGARIN_Account_Controller extends LAIKA_Account_Controller {
+class Gagarin_Account_Controller extends Laika_Account_Controller {
 
 //-------------------------------------------------------------------
 //	VARIABLES

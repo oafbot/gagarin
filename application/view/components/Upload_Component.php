@@ -1,14 +1,14 @@
 <?php 
 if(!empty($_FILES) && isset($_FILES)):
         
-    LAIKA_Event_Handler::init()->attach(
-        LAIKA_Event_Listener::init("UPLOAD_SUCCESS","GAGARIN_Upload_Controller","upload_handler") );
+    Laika_Event_Handler::init()->attach(
+        Laika_Event_Listener::init("UPLOAD_SUCCESS","Gagarin_Upload_Controller","upload_handler") );
     
-    LAIKA_Event_Handler::init()->attach(
-        LAIKA_Event_Listener::init("UPLOAD_ERROR","GAGARIN_Upload_Controller","upload_handler") );
+    Laika_Event_Handler::init()->attach(
+        Laika_Event_Listener::init("UPLOAD_ERROR","Gagarin_Upload_Controller","upload_handler") );
     
-    $file = new LAIKA_File();
-    $file->upload($_FILES,MEDIA_DIRECTORY.'/'.LAIKA_User::active()->username);
+    $file = new Laika_File();
+    $file->upload($_FILES,MEDIA_DIRECTORY.'/'.Laika_User::active()->username);
 
 endif;
 

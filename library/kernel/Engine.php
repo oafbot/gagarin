@@ -23,7 +23,7 @@
  * @final 
  */
  
-final class LAIKA_Engine{
+final class Laika_Engine{
 
 //-------------------------------------------------------------------
 //	CONSTANTS & VARIABLES
@@ -77,7 +77,7 @@ final class LAIKA_Engine{
     private function boot(){
     	
         require_once('../library/kernel/Bootstrap.php');      
-        LAIKA_Bootstrap::execute();                    
+        Laika_Bootstrap::execute();                    
     }
         
     /**
@@ -91,25 +91,25 @@ final class LAIKA_Engine{
     private function configure(){
     	
     	// Set exception handler:
-        set_exception_handler(array(LAIKA_Exception_Handler::init(),'handle'));
+        set_exception_handler(array(Laika_Exception_Handler::init(),'handle'));
     	// Attach a new observer:
-    	LAIKA_Exception_Handler::init()->attach(new LAIKA_Exception_Logger());
+    	Laika_Exception_Handler::init()->attach(new Laika_Exception_Logger());
     	
     	// Set error handler:
-    	set_error_handler(array(LAIKA_Error::init(),'error_handler'),E_ALL);
+    	set_error_handler(array(Laika_Error::init(),'error_handler'),E_ALL);
     	
     	// Set event handler
         // INSTANTIATE EVENT LISTENER:
-    	//LAIKA_Event_Handler::init()->attach(LAIKA_Event_Listener::init());
+    	//Laika_Event_Handler::init()->attach(Laika_Event_Listener::init());
     	    	
         // Establish Database Connection:
-    	LAIKA_Controller::process(new LAIKA_Command('DATABASE','CONNECT',DB_TYPE));
+    	Laika_Controller::process(new Laika_Command('DATABASE','CONNECT',DB_TYPE));
         
         // CHECK ACCESS PRIVILEGES:		    	
-    	LAIKA_Controller::process(new LAIKA_Command('ACCESS','CONFIGURE', NULL));
+    	Laika_Controller::process(new Laika_Command('ACCESS','CONFIGURE', NULL));
     	 				
     	// Initiate hooks, activate plugins:
-    	//LAIKA_Controller::process(new LAIKA_Command('PLUGINS','HOOK', NULL));    					
+    	//Laika_Controller::process(new Laika_Command('PLUGINS','HOOK', NULL));    					
     }
          
     /**
@@ -122,8 +122,8 @@ final class LAIKA_Engine{
     */
     public function execute($uri){
     		     	 		    	
-        LAIKA_Event::dispatch('URL_REQUEST',$uri);
-        LAIKA_Controller::process(new LAIKA_Command('ROUTER','REDIRECT',$uri));  
+        Laika_Event::dispatch('URL_REQUEST',$uri);
+        Laika_Controller::process(new Laika_Command('ROUTER','REDIRECT',$uri));  
     }
             
 }

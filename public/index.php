@@ -73,4 +73,4 @@
  */ 
 
 require_once('../library/kernel/Engine.php');
-LAIKA_Engine::init()->execute( $_SERVER['REQUEST_URI'] );
+Laika_Engine::init()->execute( $_SERVER['REQUEST_URI'] );

@@ -14,7 +14,7 @@
  *	@copyright      Copyright (c) 2011  Laika Soft <{@link http://oafbot.com}>
  *
  */
-class LAIKA_Exception_Logger extends Laika implements SPLObserver{
+class Laika_Exception_Logger extends Laika implements SPLObserver{
 
 //-------------------------------------------------------------------
 //	CONSTRUCTOR

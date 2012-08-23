@@ -1,5 +1,5 @@
 <?php
-class LAIKA_Event extends LAIKA_Singleton{
+class Laika_Event extends Laika_Singleton{
 
 //-------------------------------------------------------------------
 //	PROPERTIES
@@ -13,7 +13,7 @@ class LAIKA_Event extends LAIKA_Singleton{
 
     public static function dispatch($event,$param){               
         self::log(func_get_args());
-        LAIKA_Event_Handler::init()->handle($event,$param);    
+        Laika_Event_Handler::init()->handle($event,$param);    
     }
     
     public static function log($trace){

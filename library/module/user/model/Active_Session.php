@@ -1,12 +1,12 @@
 <?php
 /**
- * LAIKA_Active_Session class.
+ * Laika_Active_Session class.
  *
  * Records active sessions
  * 
- * @extends LAIKA_Abstract_Singleton_Model
+ * @extends Laika_Abstract_Singleton_Model
  */
-class LAIKA_Active_Session extends LAIKA_Abstract_Singleton_Model{
+class Laika_Active_Session extends Laika_Abstract_Singleton_Model{
 
 //-------------------------------------------------------------------
 //	PROPERTIES
@@ -34,7 +34,7 @@ class LAIKA_Active_Session extends LAIKA_Abstract_Singleton_Model{
      * @return void
      */
     public static function find_user($session){
-        $result = LAIKA_Database::select_where('user_id','active_sessions',"session = '$session'");
+        $result = Laika_Database::select_where('user_id','active_sessions',"session = '$session'");
         return $result['user_id'];
     }    
     
@@ -51,7 +51,7 @@ class LAIKA_Active_Session extends LAIKA_Abstract_Singleton_Model{
     public static function register($id){
         $session = $_SESSION['LOGIN_TOKEN'];
         $statement = "INSERT INTO active_sessions (session,user_id,created) VALUES ('$session',$id,NULL)";
-        $result = LAIKA_Database::query($statement,'INSERT');    
+        $result = Laika_Database::query($statement,'INSERT');    
     }
     
     /**
@@ -73,7 +73,7 @@ class LAIKA_Active_Session extends LAIKA_Abstract_Singleton_Model{
             $session = $_SESSION['PREVIOUS_TOKEN'];
         if(isset($session)){
             $statement = "DELETE FROM active_sessions WHERE session = '$session' AND user_id = $id";
-            LAIKA_Database::query($statement,'DELETE');
+            Laika_Database::query($statement,'DELETE');
         }                
     }
 }

@@ -3,8 +3,8 @@
    $user  = self::init()->user;
    $title = $media->name;
    
-   $active_user = LAIKA_User::active()->id;
-   $favorited   = GAGARIN_Favorite::init()->is_favorite($active_user, $media->id, $media->type);
+   $active_user = Laika_User::active()->id;
+   $favorited   = Gagarin_Favorite::init()->is_favorite($active_user, $media->id, $media->type);
 ?>
 
 <div id="container"> 
@@ -35,7 +35,7 @@
     <div id=content>
         <div id="image">
             <a href="javascript:;" onclick="enterFullScreen('<? self::init()->fullscreen(); ?>');" >
-                <img src=<? echo LAIKA_Image::api_path( $media->path, 'auto', '500' ); ?> />
+                <img src=<? echo Laika_Image::api_path( $media->path, 'auto', '500' ); ?> />
             </a>
         </div>
         <div id="info">
@@ -54,14 +54,14 @@
                 <h2>Details:</h2>
                 <? echo PICTURE_ICON; ?>&nbsp;
                 <a href="<? echo $media->path; ?>" target="blank" >Original size: </a>
-                <? echo LAIKA_Image::dimensions($media->path); ?>
+                <? echo Laika_Image::dimensions($media->path); ?>
                 <br />
                 <? echo CLOUD_ICON; ?>&nbsp;
                 <? echo "Added: ".$media->created_to_date(); ?>
                 <br />
                 <? echo $favorited ? FAVORITE_ICON : UNFAVORITE_ICON; ?>&nbsp;
                 <span class = "favorite_count">
-                <? echo GAGARIN_Favorite::count(array('item'=>$media->id)); ?>
+                <? echo Gagarin_Favorite::count(array('item'=>$media->id)); ?>
                 </span> Favorites 
             </div>
         </div>

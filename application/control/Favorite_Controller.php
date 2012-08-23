@@ -1,5 +1,5 @@
 <?php
-class GAGARIN_Favorite_Controller extends LAIKA_Abstract_Page_Controller {
+class Gagarin_Favorite_Controller extends Laika_Abstract_Page_Controller {
 
 //-------------------------------------------------------------------
 //	PROPERTIES
@@ -25,7 +25,7 @@ class GAGARIN_Favorite_Controller extends LAIKA_Abstract_Page_Controller {
      */
     public function favorite(){
         $id = $this->parameters['id'];
-        $success = GAGARIN_Favorite::mark($id);
+        $success = Gagarin_Favorite::mark($id);
         echo json_encode($success);
     }
     
@@ -37,7 +37,7 @@ class GAGARIN_Favorite_Controller extends LAIKA_Abstract_Page_Controller {
      */
     public function unfavorite(){        
         $id = $this->parameters['id'];        
-        $success = GAGARIN_Favorite::undo(GAGARIN_Favorite::find('item',$id));
+        $success = Gagarin_Favorite::undo(Gagarin_Favorite::find('item',$id));
         echo json_encode($success);
     }  
 }

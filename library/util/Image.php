@@ -1,5 +1,5 @@
 <?php
-class LAIKA_Image extends Laika{
+class Laika_Image extends Laika{
 
     private $image;
     private $type;
@@ -183,7 +183,7 @@ class LAIKA_Image extends Laika{
      * @return void
      */
     public static function dimensions($src){
-        $image = new LAIKA_Image($src);
+        $image = new Laika_Image($src);
         //$this->open($src);
         $w = $image->width();
         $h = $image->height();

@@ -1,8 +1,8 @@
 <?php
 /**
- * GAGARIN_Home_Page class.
+ * Gagarin_Home_Page class.
  */
-class GAGARIN_Home_Page extends LAIKA_Abstract_Page{
+class Gagarin_Home_Page extends Laika_Abstract_Page{
 
 	protected static $instance;
     protected $user;

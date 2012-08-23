@@ -1,7 +1,7 @@
 <?php
 $id   = self::init()->user;
-$user = LAIKA_User::load($id);
-$avatar = LAIKA_Avatar::img($user->email(),120);
+$user = Laika_User::load($id);
+$avatar = Laika_Avatar::img($user->email(),120);
 ?>
 <? self::add_style('user'); ?>
 <div id="container">
@@ -26,9 +26,9 @@ $avatar = LAIKA_Avatar::img($user->email(),120);
 <div id="container">
     <?php 
 /*
-        $last = GAGARIN_Media::last(1,array('user'=>$id));    
+        $last = Gagarin_Media::last(1,array('user'=>$id));    
         if( isset($last) )
-            echo '<img src="'.LAIKA_Image::api_path($last->path, 'auto', 500 ).'" />';
+            echo '<img src="'.Laika_Image::api_path($last->path, 'auto', 500 ).'" />';
 */
     ?>
     
@@ -36,7 +36,7 @@ $avatar = LAIKA_Avatar::img($user->email(),120);
     <? //if( isset($collection) ): ?>
         <? //$collection->shift(); ?>
         <? //self::render_foreach('user_content',$collection); ?>
-        <? self::paginate('GAGARIN_Media',8,array('user'=>$id),'user_content',array('DESC'=>'created')); ?>
+        <? self::paginate('Gagarin_Media',8,array('user'=>$id),'user_content',array('DESC'=>'created')); ?>
     <? //endif; ?>
     </p> 
 </div>

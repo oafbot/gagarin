@@ -1,6 +1,6 @@
 <?php
 
-interface LAIKA_Interface_DB_Driver{
+interface Laika_Interface_DB_Driver{
 
 
     public static function connect();

@@ -1,10 +1,10 @@
 <?php
 /**
- * GAGARIN_User_Controller class.
+ * Gagarin_User_Controller class.
  * 
- * @extends LAIKA_User_Controller
+ * @extends Laika_User_Controller
  */
-class GAGARIN_User_Controller extends LAIKA_User_Controller{
+class Gagarin_User_Controller extends Laika_User_Controller{
 
     protected static $instance;
     protected        $parameters;
@@ -17,8 +17,8 @@ class GAGARIN_User_Controller extends LAIKA_User_Controller{
 
     public function default_action(){
         $this->display(array(
-        "page"=>LAIKA_User::active()->username(),
-        "user"=>LAIKA_User::active()->id(),
+        "page"=>Laika_User::active()->username(),
+        "user"=>Laika_User::active()->id(),
         "submenu"=>unserialize($this->submenu)
         ));                 
     }    
@@ -27,8 +27,8 @@ class GAGARIN_User_Controller extends LAIKA_User_Controller{
     
     public function content(){
         $this->display(array(
-        "page"=>LAIKA_User::active()->username(),
-        "user"=>LAIKA_User::active()->id,
+        "page"=>Laika_User::active()->username(),
+        "user"=>Laika_User::active()->id,
         "submenu"=>unserialize($this->submenu),
         "component"=>"content",
         "media"=>$this->parameters['src']
@@ -44,7 +44,7 @@ class GAGARIN_User_Controller extends LAIKA_User_Controller{
      * @return void
      */
     public function __call($name,$arg){
-        $user = LAIKA_User::find('username',$name);
+        $user = Laika_User::find('username',$name);
         $id = $user->id();
         if(isset( $id ))
             $this->display(array("user"=>$id,"page"=>$user->username,"submenu"=>unserialize($this->submenu)));
@@ -67,15 +67,15 @@ class GAGARIN_User_Controller extends LAIKA_User_Controller{
         
         switch($this->parameters['show']):
             case 'all':
-                $users = LAIKA_User::paginate();
+                $users = Laika_User::paginate();
                 break;
             default:
-                $users = LAIKA_User::paginate($this->parameters['show']);
+                $users = Laika_User::paginate($this->parameters['show']);
                 break;
         endswitch;        
          
         foreach($users as $k => $user)                            
-            foreach( LAIKA_User::accessible() as $k2 => $v ) 
+            foreach( Laika_User::accessible() as $k2 => $v ) 
                 $response[$k][$k2] = $user->get_property($k2);
         
         $this->display(array(

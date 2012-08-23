@@ -15,16 +15,16 @@
  *
  */
 /**
- * LAIKA_Pdo_Driver class.
+ * Laika_Pdo_Driver class.
  *
  * Wrapping PDO in another layer of abstraction may seem silly,
  * but this allows for a failsafe if PDO may be misconfigured on the Server
  * as is the case with standard MySQL + php install on OSX.
  * 
- * @extends LAIKA_Singleton
- * @implements LAIKA_Interface_DB_Driver
+ * @extends Laika_Singleton
+ * @implements Laika_Interface_DB_Driver
  */
-class LAIKA_Pdo_Driver extends LAIKA_Singleton implements LAIKA_Interface_DB_Driver{
+class Laika_Pdo_Driver extends Laika_Singleton implements Laika_Interface_DB_Driver{
 
     protected static $instance;
     private          $connection = NULL;

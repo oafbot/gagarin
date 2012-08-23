@@ -1,5 +1,5 @@
 <?php
-class LAIKA_Uploader extends LAIKA_Singleton {
+class Laika_Uploader extends Laika_Singleton {
 
 //-------------------------------------------------------------------
 //	PROPERTIES
@@ -35,16 +35,16 @@ class LAIKA_Uploader extends LAIKA_Singleton {
     
         if($error!=0)
             self::upload_error($error);
-            //throw new LAIKA_Exception('UPLOAD_USER_ERROR',$error);
+            //throw new Laika_Exception('UPLOAD_USER_ERROR',$error);
         
         elseif(move_uploaded_file($F['tmp_name'], $target))    
             return $target; 
         else self::upload_error($error);    
-        //throw new LAIKA_Exception('UPLOAD_MOVE_ERROR',$error);
+        //throw new Laika_Exception('UPLOAD_MOVE_ERROR',$error);
     }
     
     public static function upload_error($error){
-        LAIKA_Event::dispatch('UPLOAD_ERROR',$error);
+        Laika_Event::dispatch('UPLOAD_ERROR',$error);
     }
        
 }

@@ -1,5 +1,5 @@
 <?php
-class LAIKA_Account_Controller extends LAIKA_Abstract_Page_Controller {
+class Laika_Account_Controller extends Laika_Abstract_Page_Controller {
 
 //-------------------------------------------------------------------
 //	VARIABLES
@@ -104,7 +104,7 @@ class LAIKA_Account_Controller extends LAIKA_Abstract_Page_Controller {
         $check = array('email','password');
         $required[] = 'ALL';
         $custom = array(__CLASS__.'::check_username',$data['username']);        
-        return LAIKA_Validation::validate_form($data,$check,$required,$custom);
+        return Laika_Validation::validate_form($data,$check,$required,$custom);
     }
 
     /**
@@ -115,7 +115,7 @@ class LAIKA_Account_Controller extends LAIKA_Abstract_Page_Controller {
      * @return void
      */
     public function check_username($username){
-        $result = LAIKA_Database::select_where('id','users',"username = '$username'");
+        $result = Laika_Database::select_where('id','users',"username = '$username'");
         if($result)
             return '<li>Username already exists.</li>';
     }    
@@ -132,10 +132,10 @@ class LAIKA_Account_Controller extends LAIKA_Abstract_Page_Controller {
         $data['password'] = md5($data['password'].$data['salt']);
         $data['verify']   = md5($data['verify'  ].$data['salt']); 
         
-        $user = LAIKA_User::from_array(LAIKA_Validation::sanitize_form($data));
-        LAIKA_User::add($user);
+        $user = Laika_User::from_array(Laika_Validation::sanitize_form($data));
+        Laika_User::add($user);
         
-        $account = LAIKA_Account::create($data['username']);
+        $account = Laika_Account::create($data['username']);
         $account::add();
 
         self::send_confirmation($user);
@@ -152,12 +152,12 @@ class LAIKA_Account_Controller extends LAIKA_Abstract_Page_Controller {
     public function send_confirmation($user){
         $sender  = ADMIN_EMAIL;
         $subject = 'Registration confirmation';
-        $query   = array('token'=>LAIKA_Account::get('token'));
+        $query   = array('token'=>Laika_Account::get('token'));
         
         $link = self::link_to('Confirm your account', '/account/confirm', array('title'=>'click to confirm'), $query);
-        $template = LAIKA_Mail::load_template(dirname(dirname(__FILE__)).'/view/Registration_Confirmation.php',array('link'=>$link));
+        $template = Laika_Mail::load_template(dirname(dirname(__FILE__)).'/view/Registration_Confirmation.php',array('link'=>$link));
         
-        LAIKA_Mail::sendmail($user,$subject,$template,array('SENDER'=>$sender,'FORMAT'=>'html'));        
+        Laika_Mail::sendmail($user,$subject,$template,array('SENDER'=>$sender,'FORMAT'=>'html'));        
     }
      
     /**
@@ -169,7 +169,7 @@ class LAIKA_Account_Controller extends LAIKA_Abstract_Page_Controller {
     public function resend_confirmation(){
         
         $token = md5(rand(1,99999999).SESSION_TOKEN);        
-        $user = LAIKA_User::find('email',$_POST['email']);
+        $user = Laika_User::find('email',$_POST['email']);
         $id = $user->id();
         if(isset($id)):
             $account = $user->account();
@@ -191,12 +191,12 @@ class LAIKA_Account_Controller extends LAIKA_Abstract_Page_Controller {
      */
     public function confirm(){
         if(isset($this->parameters['token'])&&!empty($this->parameters['token'])):
-            $account = LAIKA_Account::find('token',$this->parameters['token']);
+            $account = Laika_Account::find('token',$this->parameters['token']);
             $token = $account->token();
             if( isset($token) ):            
-                LAIKA_Controller::process(new LAIKA_Command('ACCESS','GRANT_ACCESS', NULL));
-                LAIKA_User::bind($account->user);
-                LAIKA_User::active()->logged_in(true);
+                Laika_Controller::process(new Laika_Command('ACCESS','GRANT_ACCESS', NULL));
+                Laika_User::bind($account->user);
+                Laika_User::active()->logged_in(true);
                 
                 /** @todo replace with update method to reduce database calls */
                 $account->dset('confirmed',true);

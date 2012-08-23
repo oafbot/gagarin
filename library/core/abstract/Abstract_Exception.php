@@ -15,13 +15,13 @@
  *
  */ 
 /**
- * Abstract LAIKA_Abstract_Exception class.
+ * Abstract Laika_Abstract_Exception class.
  * 
  * @abstract
  * @extends    Exception
- * @implements LAIKA_Interface_Exception
+ * @implements Laika_Interface_Exception
  */
-abstract class LAIKA_Abstract_Exception extends Exception implements LAIKA_Interface_Exception{
+abstract class Laika_Abstract_Exception extends Exception implements Laika_Interface_Exception{
 
 //-------------------------------------------------------------------
 //	VARIABLES

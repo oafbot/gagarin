@@ -15,9 +15,9 @@
  *
  */
 /**
- * LAIKA_Data class.
+ * Laika_Data class.
  */
-class LAIKA_Data extends Laika{
+class Laika_Data extends Laika{
 
 //-------------------------------------------------------------------
 //	METHODS

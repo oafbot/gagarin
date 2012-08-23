@@ -1,5 +1,5 @@
 <?php
-class GAGARIN_Comment extends LAIKA_Abstract_Model{
+class Gagarin_Comment extends Laika_Abstract_Model{
 
 //-------------------------------------------------------------------
 //	PROPERTIES
@@ -21,8 +21,8 @@ class GAGARIN_Comment extends LAIKA_Abstract_Model{
 //-------------------------------------------------------------------
 
     public function is_owner(){
-        if(LAIKA_Access::is_logged_in())
-            if($this->user == LAIKA_User::active()->id)
+        if(Laika_Access::is_logged_in())
+            if($this->user == Laika_User::active()->id)
                 return true;
         return false;
     }

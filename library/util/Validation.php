@@ -1,10 +1,10 @@
 <?php
 /**
- * LAIKA_Validation class.
+ * Laika_Validation class.
  * 
  * @extends Laika
  */
-class LAIKA_Validation extends Laika{
+class Laika_Validation extends Laika{
 
     /**
      * validate_form function.
@@ -28,8 +28,8 @@ class LAIKA_Validation extends Laika{
         endif;
         if(isset($custom))
             $result['custom'] = call_user_func($custom[0],$custom[1]);        
-        $errors = LAIKA_Data::recursive_array_filter($result);      
-        $v = new LAIKA_Validation_Responder($errors);
+        $errors = Laika_Data::recursive_array_filter($result);      
+        $v = new Laika_Validation_Responder($errors);
         return $v;   
     }
 
@@ -124,11 +124,11 @@ class LAIKA_Validation extends Laika{
 
 
 /**
- * LAIKA_Validation_Responder class.
+ * Laika_Validation_Responder class.
  * 
  * @extends Laika
  */
-class LAIKA_Validation_Responder extends Laika{
+class Laika_Validation_Responder extends Laika{
 
     private $passed;
     private $failed;

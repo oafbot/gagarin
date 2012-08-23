@@ -15,9 +15,9 @@
  *
  */
 /**
- * LAIKA_Time class.
+ * Laika_Time class.
  */
-class LAIKA_Time extends Laika{
+class Laika_Time extends Laika{
 
 //now(){}
 //database_datetime(){}

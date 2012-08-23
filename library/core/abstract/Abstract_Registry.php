@@ -15,12 +15,12 @@
  *
  */
 /**
- * Abstract LAIKA_Abstract_Registry class.
+ * Abstract Laika_Abstract_Registry class.
  * 
  * @abstract
  * @extends Laika_Singleton
  */
-abstract class LAIKA_Abstract_Registry extends LAIKA_Singleton{
+abstract class Laika_Abstract_Registry extends Laika_Singleton{
 
     /*
     static function add(){}

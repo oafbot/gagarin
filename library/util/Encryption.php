@@ -1,5 +1,5 @@
 <?php
-class LAIKA_Encryption extends Laika{
+class Laika_Encryption extends Laika{
     
     
 //-------------------------------------------------------------------

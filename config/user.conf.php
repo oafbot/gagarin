@@ -52,7 +52,7 @@
 //-------------------------------------------------------------------
 
     define( 'APPLICATION_TITLE',     'Gagarin'          );
-    define( 'CODE_NAME',             'GAGARIN'          ); // Application Namespace Tag
+    define( 'CODE_NAME',             'Gagarin'          ); // Application Namespace Tag
     define( 'TIME_ZONE',             'America/New_York' );
     define( 'MAX_FILE_SIZE',         1073741824         ); //1G in Bytes: Set php.ini appropriately    
     

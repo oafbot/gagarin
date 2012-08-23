@@ -19,14 +19,14 @@ LEVEL:LAYER:IDENTIFIER
   
 
 
-LAIKA_ERROR_SYSTEM          0 
-LAIKA_ERROR_APPLICATION     1
-LAIKA_ERROR_USER            2
+Laika_ERROR_SYSTEM          0 
+Laika_ERROR_APPLICATION     1
+Laika_ERROR_USER            2
 
-LAIKA_ERROR_DATABASE        3
-LAIKA_ERROR_NETWORK         4
-LAIKA_ERROR_FILE            5
+Laika_ERROR_DATABASE        3
+Laika_ERROR_NETWORK         4
+Laika_ERROR_FILE            5
 
-LAIKA_ERROR_ALERT           7    
-LAIKA_ERROR_EXCEPTION       8
-LAIKA_ERROR_FATAL           9
+Laika_ERROR_ALERT           7    
+Laika_ERROR_EXCEPTION       8
+Laika_ERROR_FATAL           9

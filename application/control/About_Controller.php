@@ -1,5 +1,5 @@
 <?php
-class GAGARIN_About_Controller extends LAIKA_Abstract_Page_Controller{
+class Gagarin_About_Controller extends Laika_Abstract_Page_Controller{
 
     protected static $instance;
     protected        $parameters;

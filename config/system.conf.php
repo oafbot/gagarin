@@ -51,5 +51,4 @@
     //define( 'PUBLIC_DIRECTORY', LAIKA_ROOT.'/public' );
     //define( 'MODULE_FOLDER',         APPLICATION_FOLDER.'/module'         );
     
-    define( 'LAIKA_NS', 'LAIKA_' );
- 
+    define( 'NAME_SPACE', 'Laika_' ); 

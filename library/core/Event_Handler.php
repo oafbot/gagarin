@@ -1,5 +1,5 @@
 <?php
-class LAIKA_Event_Handler extends LAIKA_Singleton implements SplSubject{
+class Laika_Event_Handler extends Laika_Singleton implements SplSubject{
 
 //-------------------------------------------------------------------
 //	PROPERTIES

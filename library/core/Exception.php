@@ -15,8 +15,8 @@
  *
  */
 /**
- * LAIKA_Exception class.
+ * Laika_Exception class.
  * 
- * @extends LAIKA_Abstract_Exception
+ * @extends Laika_Abstract_Exception
  */
-class LAIKA_Exception extends LAIKA_Abstract_Exception{}
+class Laika_Exception extends Laika_Abstract_Exception{}

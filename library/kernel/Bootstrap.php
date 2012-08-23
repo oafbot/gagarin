@@ -15,12 +15,12 @@
  *
  */
  /**
- * LAIKA_Bootstrap class.
+ * Laika_Bootstrap class.
  * 
  * System Boot Loader
  *
  */
-final class LAIKA_Bootstrap{
+final class Laika_Bootstrap{
 
 //-------------------------------------------------------------------
 //	VARIABLES
@@ -89,7 +89,7 @@ final class LAIKA_Bootstrap{
       
         foreach( self::$BOOT_REGISTRY['LIB'] as $base_directory ){
 
-            $class_name = str_replace(LAIKA_NS, "", $class_name);          
+            $class_name = str_replace(NAME_SPACE, "", $class_name);          
             $directory = new RecursiveIteratorIterator(new 
                                 RecursiveDirectoryIterator($base_directory));
 
@@ -102,7 +102,7 @@ final class LAIKA_Bootstrap{
         }
         
 
-        //throw new LAIKA_Exception('NO_CLASS', 900);
+        //throw new Laika_Exception('NO_CLASS', 900);
     }
 
 
@@ -129,9 +129,9 @@ final class LAIKA_Bootstrap{
                   return;
             }
         }
-        //throw new LAIKA_Exception('NO_PAGE_CONTROLLER', 800);
+        //throw new Laika_Exception('NO_PAGE_CONTROLLER', 800);
         //echo $directory . $class_name . '.php';
-        throw new LAIKA_Exception('NO_CLASS', 900);
+        throw new Laika_Exception('NO_CLASS', 900);
     }   
     
     

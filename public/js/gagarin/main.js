@@ -1,4 +1,4 @@
-const GAGARIN_ROMS = root_url+'/rom';  
+const GAGARIN_ROMS = root_url+'/rom';
 
 /*----- INITIALIZATION ------*/
 
@@ -24,5 +24,5 @@ function Main(){
         Context = Canvas.getContext("2d");
     }
     Game = new Game();
-    Game.Run();                
+    Game.Run();
 }

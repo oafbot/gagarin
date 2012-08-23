@@ -1,10 +1,10 @@
 <?php
 /**
- * LAIKA_User_Page class.
+ * Laika_User_Page class.
  * 
- * @extends LAIKA_Abstract_Page
+ * @extends Laika_Abstract_Page
  */
-class LAIKA_User_Page extends LAIKA_Abstract_Page{
+class Laika_User_Page extends Laika_Abstract_Page{
 
 	protected static $instance;
 
@@ -17,7 +17,7 @@ class LAIKA_User_Page extends LAIKA_Abstract_Page{
      */
     public function add_component($component){
         $class_name = __CLASS__;
-        $page_name  = str_replace(LAIKA_NS,"", $class_name,$count = 1); 
+        $page_name  = str_replace(NAME_SPACE,"", $class_name,$count = 1); 
                 
         if($component == "DEFAULT")
             $page_name = str_replace('_Page',"_Component",$page_name,$count = 1);             

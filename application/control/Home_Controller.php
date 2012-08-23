@@ -5,7 +5,7 @@
  *	@filesource     Home_Controller.php
  *
  *	@version        0.1.0b
- *	@package        GAGARIN
+ *	@package        Gagarin
  *	@subpackage     control
  *	@category       control
  *	@date           2011-05-21 03:37:00 -0400 (Sat, 21 May 2011)
@@ -15,11 +15,11 @@
  *
  */
 /**
- * GAGARIN_Home_Controller class.
+ * Gagarin_Home_Controller class.
  * 
- * @extends LAIKA_Abstract_Page_Controller
+ * @extends Laika_Abstract_Page_Controller
  */
-class GAGARIN_Home_Controller extends LAIKA_Abstract_Page_Controller{
+class Gagarin_Home_Controller extends Laika_Abstract_Page_Controller{
 
     protected static $instance;
     protected        $parameters;

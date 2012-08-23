@@ -1,5 +1,5 @@
 <?php
-class GAGARIN_Content_Controller extends LAIKA_Abstract_Page_Controller {
+class Gagarin_Content_Controller extends Laika_Abstract_Page_Controller {
 
 //-------------------------------------------------------------------
 //	PROPERTIES
@@ -19,11 +19,11 @@ class GAGARIN_Content_Controller extends LAIKA_Abstract_Page_Controller {
 	public function default_action(){ $this->show(); }
 	
     public function __call($name,$arg){
-        $user = LAIKA_User::find('username',$name);
+        $user = Laika_User::find('username',$name);
         $id = $user->id();
         
         //$media = HTTP_ROOT."/media/".$name."/".$this->parameters['media'];        
-        //$media = GAGARIN_Media::find('path',$media);
+        //$media = Gagarin_Media::find('path',$media);
         
         if(isset( $id ))
             $this->display(array("user"=>$id,"media"=>$media));
@@ -33,8 +33,8 @@ class GAGARIN_Content_Controller extends LAIKA_Abstract_Page_Controller {
 
     public function show(){
         
-        $media = GAGARIN_Media::find('id',$this->parameters['id']);
-        $user  = LAIKA_User::find('id',$media->user);
+        $media = Gagarin_Media::find('id',$this->parameters['id']);
+        $user  = Laika_User::find('id',$media->user);
         
         if(isset($this->parameters['id']) && !empty($this->parameters['id'])):
             $this->display(array("page"=>"content","media"=>$media,"user"=>$user));

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * LAIKA_Registry class.
+ * Laika_Registry class.
  * 
- * @extends LAIKA_Abstract_Registry
+ * @extends Laika_Abstract_Registry
  */
-class LAIKA_Registry extends LAIKA_Abstract_Registry{
+class Laika_Registry extends Laika_Abstract_Registry{
 
 //-------------------------------------------------------------------
 //	VARIABLES

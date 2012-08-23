@@ -3,11 +3,10 @@ const SCREEN_WIDTH   = 25;
 const SCREEN_HEIGHT  = 15;
 const CENTER_X       = Math.floor(SCREEN_WIDTH/2);
 const CENTER_Y       = Math.floor(SCREEN_HEIGHT/2);
-const EMPTY_TILE     =  0;
+const EMPTY_TILE     = 0;
+
 /**
 * Map
-*
-* 
 *
 */
 function Map(){
@@ -17,7 +16,7 @@ function Map(){
     this.Data;
     this.FilePath = GAGARIN_ROMS+'/demo/map.tmx';
     this.Layers;
-    this.TileSheetWidth; 
+    this.TileSheetWidth;
     this.TileSheetHeight;
     this.X;
     this.Y;
@@ -28,12 +27,12 @@ function Map(){
     this.Xml;
     
     this.Initialize = function(){
-    
+        
         var xmlhttp;
-                    
+        
         xmlhttp = new XMLHttpRequest();
         xmlhttp.open('GET', this.FilePath, false);
-        xmlhttp.setRequestHeader('Content-Type', 'text/xml');        
+        xmlhttp.setRequestHeader('Content-Type', 'text/xml');
         xmlhttp.send();
         
         this.Xml = xmlhttp.responseXML;
@@ -49,30 +48,28 @@ function Map(){
                 this.Background = this.Layers[i].getElementsByTagName('data')[0].childNodes[0].nodeValue.split(',');
             if(this.Layers[i].getAttribute('name') == 'collision')
                 this.Obstacles = this.Layers[i].getElementsByTagName('data')[0].childNodes[0].nodeValue.split(',');
-        }    
+        }
         
         this.DataSet['Background'] = this.Background;
         this.DataSet['Obstacles']  = this.Obstacles;
         
         this.TileSheetWidth  = this.Xml.getElementsByTagName('image')[0].getAttribute('width')/TILE_DIMENSION;
         this.TileSheetHeight = this.Xml.getElementsByTagName('image')[0].getAttribute('height')/TILE_DIMENSION;
-    
+        
         this.TileSheet = new Image();
         this.TileSheet.src = GAGARIN_ROMS+'/demo/'+this.Xml.getElementsByTagName('image')[0].getAttribute('source');
         this.TileSheet.addEventListener('load', this.EventSheetLoaded, false);
         
     }
-        
+    
     this.EventSheetLoaded = function(){
-        Game.LoadComplete();    
+        Game.LoadComplete();
     }
    
    
    /**
     * Render
-    *
-    * render the map
-    *
+    * Render the map
     */
     this.Render = function(x, y){
         for(var layer in this.DataSet ){
@@ -87,28 +84,28 @@ function Map(){
                     }
                     else{
                         var sourceX = EMPTY_TILE;
-                        var sourceY = EMPTY_TILE;   
+                        var sourceY = EMPTY_TILE;
                     }
                     this.OffsetX   = (col-x)*TILE_DIMENSION;
                     this.OffsetY   = (row-y)*TILE_DIMENSION;
-                                                    
+                    
                     Context.drawImage(this.TileSheet, sourceX, sourceY, TILE_DIMENSION, TILE_DIMENSION, 
                         this.OffsetX, this.OffsetY, TILE_DIMENSION, TILE_DIMENSION);
-                    i++;                
+                    i++;
                 }
             }
         }
     }
-            
+    
     this.CurrentPosition = function(){
         this.X = Map.X + Sprite.X;
-        this.Y = Map.Y + Sprite.Y;        
+        this.Y = Map.Y + Sprite.Y;
     }
     
     this.Traverse = function(d){
         var index = (( Map.Y + Sprite.Y ) * this.Cols) + ( Map.X + Sprite.X );
         switch(d){
-            case 'LEFT':               
+            case 'LEFT':
                 if(this.Obstacles[index-1] == EMPTY_TILE) return true;
                 break;
             case 'RIGHT':
@@ -116,7 +113,7 @@ function Map(){
                 break;
             case 'UP':
                 if(this.Obstacles[index - Number(this.Cols)] == EMPTY_TILE) return true;
-                break;            
+                break;
             case 'DOWN':
                 if(this.Obstacles[index + Number(this.Cols)] == EMPTY_TILE) return true;
                 break;

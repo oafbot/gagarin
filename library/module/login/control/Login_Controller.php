@@ -1,13 +1,13 @@
 <?php
 
 /**
- * LAIKA_Login_Controller class.
+ * Laika_Login_Controller class.
  * 
  * Controller for the login module.
  *
- * @extends LAIKA_Abstract_Page_Controller
+ * @extends Laika_Abstract_Page_Controller
  */
-class LAIKA_Login_Controller extends LAIKA_Abstract_Page_Controller{
+class Laika_Login_Controller extends Laika_Abstract_Page_Controller{
 
 //-------------------------------------------------------------------
 //	PROPERTIES
@@ -26,7 +26,7 @@ class LAIKA_Login_Controller extends LAIKA_Abstract_Page_Controller{
     /**
      * display function.
      *
-     * Same as the display method defined in LAIKA_Abstract_Page_Controller
+     * Same as the display method defined in Laika_Abstract_Page_Controller
      * 
      * @access public
      * @return void
@@ -49,7 +49,7 @@ class LAIKA_Login_Controller extends LAIKA_Abstract_Page_Controller{
      */
     public function default_action(){ 
         if($_SESSION['LOGIN_TOKEN']==SESSION_TOKEN):
-            LAIKA_Active_User::init()->logged_in(true);
+            Laika_Active_User::init()->logged_in(true);
             $this->redirect();
         else:
             $this->display(array("page"=>"login"));
@@ -99,13 +99,13 @@ class LAIKA_Login_Controller extends LAIKA_Abstract_Page_Controller{
      * @return void
      */
     public function denied(){
-        LAIKA_Controller::process(new LAIKA_Command('ACCESS','DESTROY_SESSION', NULL));        
+        Laika_Controller::process(new Laika_Command('ACCESS','DESTROY_SESSION', NULL));        
         $this->display(array(
             "alert"       => "Access denied: Invalid username or password.", 
             "alert_type"  => "warning", 
             "page"        => "login"));
             
-        LAIKA_Event::dispatch('ACCESS_DENIED',__FILE__);        
+        Laika_Event::dispatch('ACCESS_DENIED',__FILE__);        
     }
     
     /**
@@ -120,16 +120,16 @@ class LAIKA_Login_Controller extends LAIKA_Abstract_Page_Controller{
      * @return void
      */
     public function terminate(){
-        LAIKA_Active_User::sleep();
-        LAIKA_Active_User::init()->logged_in(false);
-        LAIKA_Controller::process(new LAIKA_Command('ACCESS','DESTROY_SESSION', NULL));        
-        LAIKA_Registry::unregister("Active_User");        
+        Laika_Active_User::sleep();
+        Laika_Active_User::init()->logged_in(false);
+        Laika_Controller::process(new Laika_Command('ACCESS','DESTROY_SESSION', NULL));        
+        Laika_Registry::unregister("Active_User");        
         $this->display(array(
             "alert"       => "You logged out sucessfully.", 
             "alert_type"  => "success", 
             "page"        => "login"));
             
-        LAIKA_Event::dispatch('LOG_OUT',__FILE__);
+        Laika_Event::dispatch('LOG_OUT',__FILE__);
     }
     
     /**
@@ -148,21 +148,21 @@ class LAIKA_Login_Controller extends LAIKA_Abstract_Page_Controller{
      */
     public function verify_credentials($user, $pass){
         
-        $result = LAIKA_Database::select_where('id,password,salt','users',"username = '{$user}'");
+        $result = Laika_Database::select_where('id,password,salt','users',"username = '{$user}'");
         
         if( $result['password'] == md5($pass.$result['salt']) ):
             
             /* Change Access state */
-            LAIKA_Controller::process(new LAIKA_Command('ACCESS','GRANT_ACCESS', NULL));
+            Laika_Controller::process(new Laika_Command('ACCESS','GRANT_ACCESS', NULL));
             
             /* Load and register user in the Registry */
-            LAIKA_User::bind($result['id']);
+            Laika_User::bind($result['id']);
             
             /* Set user status to logged in */
-            LAIKA_User::active()->logged_in(true);
+            Laika_User::active()->logged_in(true);
             
             /* Check if the user account is confirmed and activated */
-            if( LAIKA_User::active()->valid_account() )
+            if( Laika_User::active()->valid_account() )
                 $this->redirect();
             else
                 self::redirect_to('/login/activation');
@@ -182,7 +182,7 @@ class LAIKA_Login_Controller extends LAIKA_Abstract_Page_Controller{
      * @return void
      */
     public function activation(){
-        LAIKA_Controller::process(new LAIKA_Command('ACCESS','DESTROY_SESSION', NULL));
+        Laika_Controller::process(new Laika_Command('ACCESS','DESTROY_SESSION', NULL));
         $this->display(array("component"=>"activation"));
     }
 }

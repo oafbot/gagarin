@@ -1,5 +1,5 @@
 <?php
-class GAGARIN_Api_Controller extends LAIKA_Abstract_Page_Controller {
+class Gagarin_Api_Controller extends Laika_Abstract_Page_Controller {
 
 //-------------------------------------------------------------------
 //	PROPERTIES
@@ -26,12 +26,12 @@ class GAGARIN_Api_Controller extends LAIKA_Abstract_Page_Controller {
         $cache = SYS_CACHE.'img'.urlencode($pair).'.cache';
 
         if(file_exists($cache)):
-            $cached_image = new LAIKA_Image($cache);
+            $cached_image = new Laika_Image($cache);
             $cached_image->output();    
             
         else:
             $path = HTTP_ROOT.urldecode($this->parameters['src']);
-            $image = new LAIKA_Image($path);
+            $image = new Laika_Image($path);
             
             /* WIDTH: */
             if(isset($this->parameters['w'])):
@@ -74,7 +74,7 @@ class GAGARIN_Api_Controller extends LAIKA_Abstract_Page_Controller {
     }
     
     public function avatar(){
-        $user = LAIKA_User::find('id',$this->parameters['user']);
+        $user = Laika_User::find('id',$this->parameters['user']);
         if(isset($this->parameters['size']))
             $size = $this->parameters['size'];
         else

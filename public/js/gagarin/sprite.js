@@ -6,18 +6,14 @@ const FACE_RIGHT = 1;
 /**
 * Sprite
 *
-* 
-*
 */
 function Sprite(){    
     this.X = CENTER_X;
     this.Y = CENTER_Y;
-    this.Frame= 0;    
+    this.Frame= 0;
    
    /**
     * Render
-    *
-    * 
     *
     */
     this.Render = function(x,y){
@@ -52,13 +48,14 @@ function Sprite(){
             x*TILE_DIMENSION, y*TILE_DIMENSION, TILE_DIMENSION, TILE_DIMENSION);            
     }    
     
-    this.MainChar      = function(){}
+    this.MainChar = function(){}
     
 
-
-
     
-        
+    /**
+    * NonPlayerChar
+    * 
+    */    
     this.NonPlayerChar = function(){
         
         this.sourceX = 0;
@@ -66,8 +63,12 @@ function Sprite(){
         this.People = Array();
         this.X;
         this.Y;
+        this.Focus;
         
-        
+		/**
+		* Initialize.
+		* Populate and render all sprites.
+		*/
         this.Initialize = function(){
                                 
             for( var i=0; i<Map.Objects.length; i++ ){
@@ -86,9 +87,16 @@ function Sprite(){
                 for( var n=0; n<prop.length; n++ ){
                     if(prop[n].getAttribute('name') == 'direction')                    
                         var d = Number(prop[n].getAttribute('value'));
+                    
+                    if(prop[n].getAttribute('name') == 'id')                    
+                        var id = Number(prop[n].getAttribute('value'));
+                    
+                    if(prop[n].getAttribute('name') == 'chat')                    
+                        var chat = prop[n].getAttribute('value');
                 }
                 
                 this.People[i] = { 
+                    "id":id,
                     "Sprite":src, 
                     "X":x, 
                     "Y":y, 
@@ -98,13 +106,15 @@ function Sprite(){
                     "startY":y, 
                     "startD":d, 
                     "Direction":d,
+                    "chat":chat
                 };
                 
             }          
         }
                                 
         this.Render = function(){            
-            this.Frame++;
+            if(State.pause != GAME_STATE_PAUSED)
+				this.Frame++;
             if(this.Frame >= SPRITE_FRAME_COUNT){this.Frame = 0;}
             this.sourceX = this.Frame*TILE_DIMENSION;
             
@@ -185,32 +195,41 @@ function Sprite(){
             }
         }
         
-                        
+        /**
+        * Collision.		
+		* Collision check for sprites. 	
+        */                
         this.Collision = function(d){            
             for(var i =0; i<this.People.length; i++){
                 switch(d){
                     case 'LEFT':
                         if(Sprite.X-1 == Math.round(this.People[i].X/TILE_DIMENSION) 
-                            && Sprite.Y == Math.round(this.People[i].Y/TILE_DIMENSION))
-                            return false;
+                            && Sprite.Y == Math.round(this.People[i].Y/TILE_DIMENSION)){
+                            this.Focus = this.People[i];
+                            return false;}
                         break;
                     case 'RIGHT':
                         if(Sprite.X+1 == Math.round(this.People[i].X/TILE_DIMENSION) 
-                            && Sprite.Y == Math.round(this.People[i].Y/TILE_DIMENSION))
-                            return false;
+                            && Sprite.Y == Math.round(this.People[i].Y/TILE_DIMENSION)){
+                            this.Focus = this.People[i];
+                            return false;}
                         break;
                     case 'UP':
                         if(Sprite.Y-1 == Math.round(this.People[i].Y/TILE_DIMENSION) 
-                            && Sprite.X == Math.round(this.People[i].X/TILE_DIMENSION))
-                            return false;
+                            && Sprite.X == Math.round(this.People[i].X/TILE_DIMENSION)){
+                            this.Focus = this.People[i];
+                            return false;}
                         break;
                     case 'DOWN':
                         if(Sprite.Y+1 == Math.round(this.People[i].Y/TILE_DIMENSION)
-                            && Sprite.X == Math.round(this.People[i].X/TILE_DIMENSION))
-                            return false;
+                            && Sprite.X == Math.round(this.People[i].X/TILE_DIMENSION)){
+                            this.Focus = this.People[i];
+                            return false;}
                         break;
                 }            
             }
+            Message.message = null;
+            this.Focus = null;
             return true;       
         }
     }

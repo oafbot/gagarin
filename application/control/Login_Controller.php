@@ -1,10 +1,10 @@
 <?php
 /**
- * GAGARIN_Login_Controller class.
+ * Gagarin_Login_Controller class.
  * 
- * @extends LAIKA_Login_Controller
+ * @extends Laika_Login_Controller
  */
-class GAGARIN_Login_Controller extends LAIKA_Login_Controller{
+class Gagarin_Login_Controller extends Laika_Login_Controller{
 
     protected static $instance;
     protected        $parameters;

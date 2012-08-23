@@ -1,4 +1,4 @@
-<? $user = LAIKA_User::load($object->user); ?>
+<? $user = Laika_User::load($object->user); ?>
 <div class="comment_box" id="<? echo $object->id; ?>">
     <? echo $user->avatar(50); ?>
     <img src="<? echo IMG_DIRECTORY.'/pointer.png'; ?>" class="pointer"/>

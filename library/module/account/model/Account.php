@@ -1,5 +1,5 @@
 <?php
-class LAIKA_Account extends LAIKA_Abstract_Singleton_Model{
+class Laika_Account extends Laika_Abstract_Singleton_Model{
 
 //-------------------------------------------------------------------
 //	VARIABLES
@@ -24,7 +24,7 @@ class LAIKA_Account extends LAIKA_Abstract_Singleton_Model{
     public static function create($username){
         
         $account = self::init();        
-        $user = LAIKA_User::find('username',$username);              
+        $user = Laika_User::find('username',$username);              
      
         $account->user($user->id);
         $account->token(md5($user->salt().SESSION_TOKEN));

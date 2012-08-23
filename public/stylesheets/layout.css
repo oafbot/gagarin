@@ -34,7 +34,8 @@ header h2 a{
 	-moz-transition-duration: 0.5s; 
 	-moz-transition-timing-function: linear;
 }
-
+header h2 a{color:#bbb;}
+header h2 a:hover{color:#FF3366;}
 /*
 header h2 a{color:#3399cc;}
 header h2 a:hover{color:#83c0ff;}

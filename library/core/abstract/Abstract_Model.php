@@ -1,11 +1,11 @@
 <?php
 /**
- * Abstract LAIKA_Abstract_Model class.
+ * Abstract Laika_Abstract_Model class.
  * 
  * @abstract
  * @extends Laika
  */
-abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Model{
+abstract class Laika_Abstract_Model extends Laika implements Laika_Interface_Model{
 
 /**
 * @todo May be a good idea to make $table and $model static or class constants
@@ -34,7 +34,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
         if(is_int(strpos($class,CODE_NAME)))
             $this->model = str_replace(CODE_NAME.'_', "", $class, $count = 1);
         else
-            $this->model = str_replace(LAIKA_NS, "", $class, $count = 1);
+            $this->model = str_replace(NAME_SPACE, "", $class, $count = 1);
         $this->table = strtolower($this->model)."s";        
     }
 
@@ -53,7 +53,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
         $this->$property = $value;
         $table = $this->table;
         $id    = $this->id;         
-        LAIKA_Database::update($table, $property, $value, "id = $id");
+        Laika_Database::update($table, $property, $value, "id = $id");
     }
     
     /**
@@ -66,7 +66,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
     public function dget($property){
         $table  = $this->table;
         $id     = $this->id;
-        $result = LAIKA_Database::select_where($property, $table, "id = $id");
+        $result = Laika_Database::select_where($property, $table, "id = $id");
         $this->$property = $result[$property];
         return $result[$property];
     }
@@ -88,7 +88,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
         $m = new $class();
         $table = $m->table;
 
-        $result = LAIKA_Database::select_by($id,$table);
+        $result = Laika_Database::select_by($id,$table);
         $model = get_class_vars(get_class($m));
         $count = count($model);
         
@@ -112,7 +112,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
         $class = get_called_class();
         $m = new $class();
         $table = $m->table;
-        $result = LAIKA_Database::select_where('id', $table, "$param = '$value'");
+        $result = Laika_Database::select_where('id', $table, "$param = '$value'");
         return $m::load($result['id']);
     }
     
@@ -145,7 +145,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
         $m = new $class();
         $table = $m->table;
 
-        $full_map = LAIKA_Database::show($table);
+        $full_map = Laika_Database::show($table);
         foreach($full_map as $array => $column)
             foreach($column as $key => $value)
                 if($key == 'Field')
@@ -162,7 +162,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
      */
     public static function add(){
         $obj = func_get_arg(0);
-        LAIKA_Database::add($obj);
+        Laika_Database::add($obj);
     }
      
     /**
@@ -174,7 +174,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
      * @return void
      */
     public static function delete($object){
-        LAIKA_Database::delete($object->table,$object->id);
+        Laika_Database::delete($object->table,$object->id);
     }
         
 
@@ -194,7 +194,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
         foreach($map as $key => $value)
             if(isset($object->$value))
                 $properties[$value] = $object->$value;
-        LAIKA_Database::batch_update($object->table,$properties,"id={$object->id}");
+        Laika_Database::batch_update($object->table,$properties,"id={$object->id}");
     }
 
     
@@ -212,9 +212,9 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
         
         if(func_num_args()>0):
             $conditions =  self::prep_conditions(func_get_arg(0));
-            $result = LAIKA_Database::count($table,$conditions);
+            $result = Laika_Database::count($table,$conditions);
         else:
-            $result = LAIKA_Database::count($table);
+            $result = Laika_Database::count($table);
         endif;
         return (int)array_pop(array_pop($result));
     }    
@@ -244,7 +244,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
                 
         /* Is the LIMIT set and is it more than 1? */        
         if( isset($args[0]) && $args[0]>1 ):                            
-            $result = LAIKA_Database::last($table,$args[0],$conditions);
+            $result = Laika_Database::last($table,$args[0],$conditions);
            
             if($result):
                 foreach($result as $key => $value)
@@ -254,7 +254,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
         
         /* If the LIMIT is set to 1 or if no arguments were set*/        
         else:
-            $result = LAIKA_Database::last($table,1,$conditions);
+            $result = Laika_Database::last($table,1,$conditions);
             if($result)
                 return self::from_array($result);
         endif;
@@ -274,9 +274,9 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
         $table = $m->table;
 
         if(isset($args[0]) && $args[0] > 1)       
-            $result = LAIKA_Database::first($table,$args[0]);
+            $result = Laika_Database::first($table,$args[0]);
         else
-            $result = LAIKA_Database::first($table,1);
+            $result = Laika_Database::first($table,1);
         return self::from_array($result);
     }
     
@@ -319,7 +319,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
                 break;
         }
         $table = $model->table;
-        return LAIKA_Database::offset($table,$column,$limit,$offset);
+        return Laika_Database::offset($table,$column,$limit,$offset);
     }   
     
     /**
@@ -339,7 +339,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
         $table = $model->table; 
         $conditions = $model::prep_conditions($params);
                        
-        return LAIKA_Database::find_with_offset($conditions,$table,$limit,$offset);
+        return Laika_Database::find_with_offset($conditions,$table,$limit,$offset);
     }    
     
     /**
@@ -362,7 +362,7 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
         $order = key($ord);
         $by = $ord[$order];
                        
-        return LAIKA_Database::find_with_offset_order_by($conditions,$table,$limit,$offset,$by,$order);    
+        return Laika_Database::find_with_offset_order_by($conditions,$table,$limit,$offset,$by,$order);    
     }
     
     /**
@@ -622,13 +622,13 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
      * @return void
      */
     public static function collection($array){
-        $collection = new LAIKA_Collection();
+        $collection = new Laika_Collection();
         $class = get_called_class();
         $m = new $class();
 
         foreach($array as $key => $value)
             if(is_array($value))
-                $collection[] = new LAIKA_Collectable($m::from_array($value));
+                $collection[] = new Laika_Collectable($m::from_array($value));
         return $collection;    
     }
     
@@ -652,29 +652,29 @@ abstract class LAIKA_Abstract_Model extends Laika implements LAIKA_Interface_Mod
     
     
     public function created_to_date(){
-       return LAIKA_Time::database_to_date($this->created);
+       return Laika_Time::database_to_date($this->created);
     }
     public function created_to_shortdate(){
-       return LAIKA_Time::database_to_shortdate($this->created);
+       return Laika_Time::database_to_shortdate($this->created);
     }
     public function created_to_datetime(){
-        return LAIKA_Time::database_to_datetime($this->created);
+        return Laika_Time::database_to_datetime($this->created);
     }
     public function created_to_time(){
-        return LAIKA_Time::database_to_time($this->created);
+        return Laika_Time::database_to_time($this->created);
     }
     
     public function updated_to_date(){
-        return LAIKA_Time::database_to_date($this->updated);
+        return Laika_Time::database_to_date($this->updated);
     }
     public function updated_to_shortdate(){
-        return LAIKA_Time::database_to_shortdate($this->updated);    
+        return Laika_Time::database_to_shortdate($this->updated);    
     }
     public function updated_to_datetime(){
-        return LAIKA_Time::database_to_datetime($this->updated);
+        return Laika_Time::database_to_datetime($this->updated);
     }
     public function updated_to_time(){
-        return LAIKA_Time::database_to_time($this->updated);
+        return Laika_Time::database_to_time($this->updated);
     }
     
     /**

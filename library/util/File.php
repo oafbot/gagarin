@@ -1,5 +1,5 @@
 <?php
-class LAIKA_File extends Laika{
+class Laika_File extends Laika{
     
    // private static $path;
     //private static $file;
@@ -9,25 +9,25 @@ class LAIKA_File extends Laika{
 
     
     public function open(){
-        //copy($old, $new) or throw new LAIKA_Exception('FILE_OPEN_ERROR',850);
+        //copy($old, $new) or throw new Laika_Exception('FILE_OPEN_ERROR',850);
     }
     
     public function close(){
-        //copy($old, $new) or throw new LAIKA_Exception('FILE_CLOSE_ERROR',859);
+        //copy($old, $new) or throw new Laika_Exception('FILE_CLOSE_ERROR',859);
     }
     
     public function read(){
-/*         copy($old, $new) or throw new LAIKA_Exception('FILE_READ_ERROR',854); */
+/*         copy($old, $new) or throw new Laika_Exception('FILE_READ_ERROR',854); */
     }
     
     public function write(){
-/*         copy($old, $new) or throw new LAIKA_Exception('FILE_WRITE_ERROR',855); */
+/*         copy($old, $new) or throw new Laika_Exception('FILE_WRITE_ERROR',855); */
     }
     
     public function move($old,$new){
         if(copy($old, $new))
             unlink($old);
-        else throw new LAIKA_Exception('FILE_MOVE_ERROR',853);
+        else throw new Laika_Exception('FILE_MOVE_ERROR',853);
         return true;
     }
     
@@ -36,17 +36,17 @@ class LAIKA_File extends Laika{
     }
     
     public function rename(){
-/*         rename($old, $new) or throw new LAIKA_Exception('FILE_RENAME_ERROR',852); */
+/*         rename($old, $new) or throw new Laika_Exception('FILE_RENAME_ERROR',852); */
     }
     
     public function copy(){
-/*         copy($old, $new) or throw new LAIKA_Exception('FILE_COPY_ERROR',851); */
+/*         copy($old, $new) or throw new Laika_Exception('FILE_COPY_ERROR',851); */
     }
     
     public function upload($file,$move){
         
         if(!isset($file)||empty($file))
-            LAIKA_Event::dispatch('UPLOAD_ERROR',0);    
+            Laika_Event::dispatch('UPLOAD_ERROR',0);    
         
         $f     = array();
         $post  = $file['upload'];
@@ -65,7 +65,7 @@ class LAIKA_File extends Laika{
             $uuid  = uniqid(hash('crc32',$user).'_').".$ext";
             $path  = $move.'/'.$uuid;         
         
-            if($this->move(LAIKA_Uploader::init()->upload($upload),$path))
+            if($this->move(Laika_Uploader::init()->upload($upload),$path))
                 $success = true;
             else
                 $success = false;           
@@ -74,9 +74,9 @@ class LAIKA_File extends Laika{
         }
         
         if($success)
-            LAIKA_Event::dispatch('UPLOAD_SUCCESS',$ids);
+            Laika_Event::dispatch('UPLOAD_SUCCESS',$ids);
         else
-            LAIKA_Event::dispatch('UPLOAD_ERROR',0);  
+            Laika_Event::dispatch('UPLOAD_ERROR',0);  
     }
     
     public function download(){}
