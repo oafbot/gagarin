@@ -14,6 +14,13 @@ const GAME_STATE_SCROLL_DOWN_OFF   = 240;
 
 const GAME_STATE_PAUSED  = 0;
 const GAME_STATE_RUNNING = 1;
+
+const GAME_STATE_ADVENTURE = 0;
+const GAME_STATE_MENU      = 1;
+const GAME_STATE_COMBAT    = 2;
+const GAME_STATE_DIALOG    = 3;
+const GAME_STATE_EXIT      = 4;
+const GAME_STATE_MULTI_DIALOG = 5;
 /*
 const GAME_STATE_INIT=0;
 const GAME_STATE_WAIT_FOR_LOAD=10;
@@ -33,19 +40,16 @@ const GAME_STATE_PLAYER_LOSE=140;
 const GAME_STATE_GAME_OVER=150;
 */
 
-function StateMachine(){   
+function StateMachine(){
+    this.Direction;
+    this.Scroll;
+    this.Pause;
+    this.Mode;
     
     this.CheckState = function(){
         //Input.Check();        
-    } 
-    
-    this.Direction;
-    this.Scroll;
-    // this.Pause;
-	
-    this.multiline = new Array();
-    
-    
+    }
+
     this.SwitchGameState = function(){}
     
     this.ScrLock = function(){

@@ -1,17 +1,17 @@
 const DRAW_INTERVAL = 300;
 const KEY_INTERVAL  = 300;
-const DIALOG_INTERVAL = 150;
+const DIALOG_INTERVAL = 15;
 
 const OFF           = 0;
 const ON            = 1;
 
 /**
-* Game
-*
-*/
+ * Game
+ *
+ */
 function Game(){
    /**
-    * Run
+    * Run.
     * Run the game
     */
     this.Run = function(){
@@ -19,7 +19,6 @@ function Game(){
         this.LoadContent();
         this.RunGameLoop();
     }
-
 
    /**
     * Initialize.
@@ -33,24 +32,27 @@ function Game(){
         
         State = new StateMachine();
         State.Scroll = {'UP':ON,'RIGHT':ON,'DOWN':ON,'LEFT':ON};
+        State.Mode = GAME_STATE_ADVENTURE;
         
         Input = new UserInput(); 
 
-        KeyboardController({
-        37: function() { Input.Move('LEFT');  },
-        38: function() { Input.Move('UP');    },
-        39: function() { Input.Move('RIGHT'); },
-        40: function() { Input.Move('DOWN');  },
-        65: function() { Input.Action(); },
-        32: function() { Input.Action(); }
+        Input.KeyboardController({
+            37: function() { Input.Move('LEFT');  },
+            38: function() { Input.Move('UP');    },
+            39: function() { Input.Move('RIGHT'); },
+            40: function() { Input.Move('DOWN');  },
+            32: function() {},
+            65: function() { Input.Action(); },
+            // 83: function() { Input.Menu(); },
+            90: function() { Input.Action(); },
+            88: function() { Input.Menu(); }
         }, KEY_INTERVAL);
                
     }
-    
-    
+        
    /**
-    * LoadContent
-    * Load content Ð graphics, sound etc.
+    * LoadContent.
+    * Load map, graphics, sound... etc.
     */
     this.LoadContent = function(){
         Map   = new Map();
@@ -61,14 +63,18 @@ function Game(){
         Sprite = new Sprite();
         NPC = new Sprite.NonPlayerChar();
         NPC.Initialize();
-        
+                
         Message = new Message();
-        //MPC = Sprite.MainChar();
+        Sound   = new Sound();
+        Menu    = new Menu();
         
-              
-        //this.GameLoop = setInterval(this.RunGameLoop, DRAW_INTERVAL);
+        //MPC = Sprite.MainChar();      
     }
     
+   /**
+    * LoadComplete.
+    *
+    */
     this.LoadComplete = function(){
         this.GameLoop = setInterval(this.RunGameLoop, DRAW_INTERVAL);
     }
@@ -83,15 +89,24 @@ function Game(){
         Game.Draw();
     }
     
+   /**
+    * Pause.
+    *
+    */
     this.Pause = function(){
         clearInterval(this.GameLoop);
-        State.pause = GAME_STATE_PAUSED;
+        State.Pause = GAME_STATE_PAUSED;
     }
     
+   /**
+    * Unpause.
+    *
+    */
     this.Unpause = function(){
         clearInterval(this.GameLoop);
-        this.LoadComplete();
-        State.pause = GAME_STATE_RUNNING;
+        this.GameLoop = setInterval(this.RunGameLoop, DRAW_INTERVAL);
+        Message.ClearDialog();
+        State.Pause = GAME_STATE_RUNNING;
     }
             
    /**
@@ -105,15 +120,13 @@ function Game(){
     * Render graphics to screen
     */
     this.Draw = function(){
-        
-        /* console.log(Math.floor(NPC.X/TILE_DIMENSION)); */
-        /* console.log(Math.floor(NPC.Y/TILE_DIMENSION)); */
-        /* console.log('Y:'+Sprite.Y); */
-        /* console.log('X:'+Sprite.X); */
-        
         Map.Render(Map.X,Map.Y);
         Sprite.Render(Sprite.X,Sprite.Y);
         NPC.Render();
         Message.Render();
+
+        // console.log("Mode: " + State.Mode);
+        // console.log("Pause: " + State.Pause);
+
     }
 }

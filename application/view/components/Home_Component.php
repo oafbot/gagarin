@@ -1,5 +1,17 @@
-<? self::scripts('gagarin/modernizr','gagarin/main','gagarin/game','gagarin/map','gagarin/state','gagarin/input','gagarin/sprite', 'gagarin/message', 'gagarin/draw'); ?>
-<?php
+<?php 
+	self::scripts('gagarin/modernizr',
+				  'gagarin/main',
+				  'gagarin/game',
+				  'gagarin/map',
+				  'gagarin/state',
+				  'gagarin/input',
+				  'gagarin/sprite',
+				  'gagarin/message',
+				  'gagarin/draw',
+				  'gagarin/sound',
+				  'gagarin/menu'
+				 );
+
     $user  = self::init()->get_user();
     $title = self::init()->get_title();
 ?>

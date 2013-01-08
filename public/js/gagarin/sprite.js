@@ -4,7 +4,7 @@ const FACE_DOWN  = 0;
 const FACE_LEFT  = 3;
 const FACE_RIGHT = 1;
 /**
-* Sprite
+* Sprite.
 *
 */
 function Sprite(){    
@@ -13,7 +13,7 @@ function Sprite(){
     this.Frame= 0;
    
    /**
-    * Render
+    * Render.
     *
     */
     this.Render = function(x,y){
@@ -48,19 +48,17 @@ function Sprite(){
             x*TILE_DIMENSION, y*TILE_DIMENSION, TILE_DIMENSION, TILE_DIMENSION);            
     }    
     
-    this.MainChar = function(){}
-    
-
-    
+    this.MainPlayerChar = function(){}
+        
     /**
-    * NonPlayerChar
+    * NonPlayerChar.
     * 
     */    
     this.NonPlayerChar = function(){
         
         this.sourceX = 0;
         this.Frame   = 0;
-        this.People = Array();
+        this.Cast = Array();
         this.X;
         this.Y;
         this.Focus;
@@ -95,7 +93,7 @@ function Sprite(){
                         var chat = prop[n].getAttribute('value');
                 }
                 
-                this.People[i] = { 
+                this.Cast[i] = { 
                     "id":id,
                     "Sprite":src, 
                     "X":x, 
@@ -113,85 +111,88 @@ function Sprite(){
         }
                                 
         this.Render = function(){            
-            if(State.pause != GAME_STATE_PAUSED)
+            if(State.Pause != GAME_STATE_PAUSED)
 				this.Frame++;
-            if(this.Frame >= SPRITE_FRAME_COUNT){this.Frame = 0;}
-            this.sourceX = this.Frame*TILE_DIMENSION;
+            if(this.Frame >= SPRITE_FRAME_COUNT)
+                this.Frame = 0;
+            if(State.Pause == GAME_STATE_PAUSED && this.Frame == 3)
+                this.Frame = 1;
             
-            for(var i=0; i<this.People.length; i++){
-                                        
-                sourceY = this.People[i].Direction*TILE_DIMENSION;
+            this.sourceX = this.Frame*TILE_DIMENSION;
+
+            for(var i=0; i<this.Cast.length; i++){                                        
                 
-                switch(this.People[i].Direction){   
+                sourceY = this.Cast[i].Direction*TILE_DIMENSION;
+                
+                switch(this.Cast[i].Direction){   
                     case FACE_RIGHT:
-                        if(!(Sprite.X-1 == Math.round(this.People[i].X/TILE_DIMENSION) 
-                            && Sprite.Y == Math.round(this.People[i].Y/TILE_DIMENSION))){
-                            this.People[i].X = -((Map.X*TILE_DIMENSION) - this.People[i].prevX) + (this.Frame)*TILE_DIMENSION;
+                        if(!(Sprite.X-1 == Math.round(this.Cast[i].X/TILE_DIMENSION) 
+                            && Sprite.Y == Math.round(this.Cast[i].Y/TILE_DIMENSION))){
+                            this.Cast[i].X = -((Map.X*TILE_DIMENSION) - this.Cast[i].prevX) + (this.Frame)*TILE_DIMENSION;
                             if(this.Frame >= 3){                            
-                                this.People[i].Direction = FACE_LEFT;
-                                if(this.People[i].startD == FACE_RIGHT)
-                                    this.People[i].prevX = this.People[i].startX+3*TILE_DIMENSION;
+                                this.Cast[i].Direction = FACE_LEFT;
+                                if(this.Cast[i].startD == FACE_RIGHT)
+                                    this.Cast[i].prevX = this.Cast[i].startX+3*TILE_DIMENSION;
                                 else
-                                    this.People[i].prevX = this.People[i].startX;                                                           
+                                    this.Cast[i].prevX = this.Cast[i].startX;                                                           
                             }
                         } //else this.Frame = 0;
-                        this.People[i].Y = -((Map.Y*TILE_DIMENSION) - this.People[i].prevY);
+                        this.Cast[i].Y = -((Map.Y*TILE_DIMENSION) - this.Cast[i].prevY);
                         break;
                     
                     case FACE_LEFT:
-                        if(!(Sprite.X+1 == Math.round(this.People[i].X/TILE_DIMENSION) 
-                            && Sprite.Y == Math.round(this.People[i].Y/TILE_DIMENSION))){ 
-                            this.People[i].X = -((Map.X*TILE_DIMENSION) - this.People[i].prevX) - (this.Frame)*TILE_DIMENSION;
+                        if(!(Sprite.X+1 == Math.round(this.Cast[i].X/TILE_DIMENSION) 
+                            && Sprite.Y == Math.round(this.Cast[i].Y/TILE_DIMENSION))){ 
+                            this.Cast[i].X = -((Map.X*TILE_DIMENSION) - this.Cast[i].prevX) - (this.Frame)*TILE_DIMENSION;
                             if(this.Frame >= 3){
-                                this.People[i].Direction = FACE_RIGHT;
-                                if(this.People[i].startD == FACE_LEFT)
-                                    this.People[i].prevX = this.People[i].startX-3*TILE_DIMENSION;
+                                this.Cast[i].Direction = FACE_RIGHT;
+                                if(this.Cast[i].startD == FACE_LEFT)
+                                    this.Cast[i].prevX = this.Cast[i].startX-3*TILE_DIMENSION;
                                 else
-                                    this.People[i].prevX = this.People[i].startX;
+                                    this.Cast[i].prevX = this.Cast[i].startX;
                             }
                         } //else this.Frame = 0;
-                        this.People[i].Y = -((Map.Y*TILE_DIMENSION) - this.People[i].prevY);
+                        this.Cast[i].Y = -((Map.Y*TILE_DIMENSION) - this.Cast[i].prevY);
                         break;
                     
                     case FACE_DOWN:
-                        if(!(Sprite.Y-1 == Math.round(this.People[i].Y/TILE_DIMENSION) 
-                            && Sprite.X == Math.round(this.People[i].X/TILE_DIMENSION))){ 
-                            this.People[i].Y = -((Map.Y*TILE_DIMENSION) - this.People[i].prevY) + (this.Frame)*TILE_DIMENSION;
+                        if(!(Sprite.Y-1 == Math.round(this.Cast[i].Y/TILE_DIMENSION) 
+                            && Sprite.X == Math.round(this.Cast[i].X/TILE_DIMENSION))){ 
+                            this.Cast[i].Y = -((Map.Y*TILE_DIMENSION) - this.Cast[i].prevY) + (this.Frame)*TILE_DIMENSION;
                             
                             if(this.Frame >= 3){
-                                this.People[i].Direction = FACE_UP;
-                                if(this.People[i].startD == FACE_DOWN)
-                                    this.People[i].prevY = this.People[i].startY+3*TILE_DIMENSION;
+                                this.Cast[i].Direction = FACE_UP;
+                                if(this.Cast[i].startD == FACE_DOWN)
+                                    this.Cast[i].prevY = this.Cast[i].startY+3*TILE_DIMENSION;
                                 else
-                                    this.People[i].prevY = this.People[i].startY;
+                                    this.Cast[i].prevY = this.Cast[i].startY;
                             }                                 
                         }
-                        this.People[i].X = -((Map.X*TILE_DIMENSION) - this.People[i].prevX);
+                        this.Cast[i].X = -((Map.X*TILE_DIMENSION) - this.Cast[i].prevX);
                         break;
                     
                     case FACE_UP:
-                        if(!(Sprite.Y+1 == Math.round(this.People[i].Y/TILE_DIMENSION)
-                            && Sprite.X == Math.round(this.People[i].X/TILE_DIMENSION))){ 
-                            this.People[i].Y = -((Map.Y*TILE_DIMENSION) - this.People[i].prevY) - (this.Frame)*TILE_DIMENSION;
+                        if(!(Sprite.Y+1 == Math.round(this.Cast[i].Y/TILE_DIMENSION)
+                            && Sprite.X == Math.round(this.Cast[i].X/TILE_DIMENSION))){ 
+                            this.Cast[i].Y = -((Map.Y*TILE_DIMENSION) - this.Cast[i].prevY) - (this.Frame)*TILE_DIMENSION;
                             if(this.Frame >= 3){     
-                                this.People[i].Direction = FACE_DOWN;
-                                if(this.People[i].startD == FACE_UP)
-                                    this.People[i].prevY = this.People[i].startY-3*TILE_DIMENSION;
+                                this.Cast[i].Direction = FACE_DOWN;
+                                if(this.Cast[i].startD == FACE_UP)
+                                    this.Cast[i].prevY = this.Cast[i].startY-3*TILE_DIMENSION;
                                 else
-                                    this.People[i].prevY = this.People[i].startY;
+                                    this.Cast[i].prevY = this.Cast[i].startY;
                             }
                         }
-                        this.People[i].X = -((Map.X*TILE_DIMENSION) - this.People[i].prevX);
+                        this.Cast[i].X = -((Map.X*TILE_DIMENSION) - this.Cast[i].prevX);
                         break;                                                                       
                 }
-                                
-                //this.People[i].X = -((Map.X*TILE_DIMENSION) - this.People[i].origX);
-                //this.People[i].Y = -((Map.Y*TILE_DIMENSION) - this.People[i].origY);
+                //this.Cast[i].X = -((Map.X*TILE_DIMENSION) - this.Cast[i].origX);
+                //this.Cast[i].Y = -((Map.Y*TILE_DIMENSION) - this.Cast[i].origY);
                 
                 var npc = new Image();
-                npc.src = this.People[i].Sprite;                                
+                npc.src = this.Cast[i].Sprite;                                
                 Context.drawImage(npc, this.sourceX, sourceY, TILE_DIMENSION, TILE_DIMENSION, 
-                        this.People[i].X, this.People[i].Y, TILE_DIMENSION, TILE_DIMENSION);
+                        this.Cast[i].X, this.Cast[i].Y, TILE_DIMENSION, TILE_DIMENSION);
             }
         }
         
@@ -200,30 +201,30 @@ function Sprite(){
 		* Collision check for sprites. 	
         */                
         this.Collision = function(d){            
-            for(var i =0; i<this.People.length; i++){
+            for(var i =0; i<this.Cast.length; i++){
                 switch(d){
                     case 'LEFT':
-                        if(Sprite.X-1 == Math.round(this.People[i].X/TILE_DIMENSION) 
-                            && Sprite.Y == Math.round(this.People[i].Y/TILE_DIMENSION)){
-                            this.Focus = this.People[i];
+                        if(Sprite.X-1 == Math.round(this.Cast[i].X/TILE_DIMENSION) 
+                            && Sprite.Y == Math.round(this.Cast[i].Y/TILE_DIMENSION)){
+                            this.Focus = this.Cast[i];
                             return false;}
                         break;
                     case 'RIGHT':
-                        if(Sprite.X+1 == Math.round(this.People[i].X/TILE_DIMENSION) 
-                            && Sprite.Y == Math.round(this.People[i].Y/TILE_DIMENSION)){
-                            this.Focus = this.People[i];
+                        if(Sprite.X+1 == Math.round(this.Cast[i].X/TILE_DIMENSION) 
+                            && Sprite.Y == Math.round(this.Cast[i].Y/TILE_DIMENSION)){
+                            this.Focus = this.Cast[i];
                             return false;}
                         break;
                     case 'UP':
-                        if(Sprite.Y-1 == Math.round(this.People[i].Y/TILE_DIMENSION) 
-                            && Sprite.X == Math.round(this.People[i].X/TILE_DIMENSION)){
-                            this.Focus = this.People[i];
+                        if(Sprite.Y-1 == Math.round(this.Cast[i].Y/TILE_DIMENSION) 
+                            && Sprite.X == Math.round(this.Cast[i].X/TILE_DIMENSION)){
+                            this.Focus = this.Cast[i];
                             return false;}
                         break;
                     case 'DOWN':
-                        if(Sprite.Y+1 == Math.round(this.People[i].Y/TILE_DIMENSION)
-                            && Sprite.X == Math.round(this.People[i].X/TILE_DIMENSION)){
-                            this.Focus = this.People[i];
+                        if(Sprite.Y+1 == Math.round(this.Cast[i].Y/TILE_DIMENSION)
+                            && Sprite.X == Math.round(this.Cast[i].X/TILE_DIMENSION)){
+                            this.Focus = this.Cast[i];
                             return false;}
                         break;
                 }            

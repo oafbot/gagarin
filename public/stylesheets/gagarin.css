@@ -1,8 +1,8 @@
 #screen{
     margin-top:25px;
-    width:812px;
-    height:492px;
-    border: #666 1px solid;
+    width:832px;
+    height:512px;
+    border: #777 2px solid;
     border-radius:5px;
     margin-left:auto;
     margin-right:auto;    
@@ -15,7 +15,7 @@ canvas{
     margin-left:10px;
 */
     border-radius:5px;
-    border: #444 6px inset;
+    border: #666 16px inset;
 }
 
 #container{

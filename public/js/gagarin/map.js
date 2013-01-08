@@ -6,9 +6,9 @@ const CENTER_Y       = Math.floor(SCREEN_HEIGHT/2);
 const EMPTY_TILE     = 0;
 
 /**
-* Map
-*
-*/
+ * Map
+ *
+ */
 function Map(){
     
     this.Rows;
@@ -26,6 +26,10 @@ function Map(){
     this.DataSet = Array();
     this.Xml;
     
+   /**
+    * Initialize 
+    *
+    */
     this.Initialize = function(){
         
         var xmlhttp;
@@ -96,12 +100,18 @@ function Map(){
             }
         }
     }
-    
+   
+   /**
+    * CurrentPosition
+    */
     this.CurrentPosition = function(){
         this.X = Map.X + Sprite.X;
         this.Y = Map.Y + Sprite.Y;
     }
     
+   /**
+    * Traverse
+    */
     this.Traverse = function(d){
         var index = (( Map.Y + Sprite.Y ) * this.Cols) + ( Map.X + Sprite.X );
         switch(d){
